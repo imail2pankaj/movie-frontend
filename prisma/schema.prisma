@@ -1,0 +1,159 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  //output   = "./generated/client"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user_type {
+  id         BigInt   @id @default(autoincrement())
+  title      String   @db.VarChar(255)
+  users      users[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model users {
+  id           BigInt    @id @default(autoincrement())
+  first_name   String    @db.VarChar(64)
+  middle_name  String?   @db.VarChar(64)
+  last_name    String    @db.VarChar(64)
+  email        String    @db.VarChar(124)
+  password     String    @db.VarChar(64)
+  image        String?   @db.VarChar(64)
+  user_type_id BigInt
+  user_type    user_type @relation(fields: [user_type_id], references: [id])
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+}
+
+model person_types {
+  id                      BigInt                    @id @default(autoincrement())
+  title                   String                    @db.VarChar(255)
+  person_types_in_persons person_types_in_persons[]
+  created_at              DateTime                  @default(now())
+  updated_at              DateTime                  @updatedAt
+}
+
+model person_types_in_persons {
+  person_type_id BigInt
+  person_types   person_types @relation(fields: [person_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  person_id      BigInt
+  persons        persons      @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([person_type_id, person_id], map: "person_type_id_person_id_unique")
+
+  @@index([person_type_id, person_id])
+}
+
+model persons {
+  id                      BigInt                    @id @default(autoincrement())
+  full_name    String    @db.VarChar(128)
+  slug         String    @db.VarChar(128)
+  // first_name              String                    @db.VarChar(64)
+  // middle_name             String?                   @db.VarChar(64)
+  // last_name               String                    @db.VarChar(64)
+  bio                     String?                   @db.Text()
+  description             String?                   @db.Text()
+  birth_name              String?                   @db.VarChar(255)
+  nick_names              String?                   @db.VarChar(255)
+  height                  String?                   @db.VarChar(32)
+  born                    DateTime?                 @db.Date()
+  died                    DateTime?                 @db.Date()
+  birth_place             String?                   @db.VarChar(64)
+  death_place             String?                   @db.VarChar(64)
+  image                   String                    @db.VarChar(64)
+  gender                  gender                    @default(Male)
+  status                  person_status             @default(Draft)
+  person_types_in_persons person_types_in_persons[]
+  person_links            person_links[]
+  created_at              DateTime                  @default(now())
+  updated_at              DateTime                  @updatedAt
+  person_media            person_media[]
+
+  @@index([status,full_name, slug, gender])
+}
+
+enum person_status {
+  Draft
+  Publish
+}
+
+enum gender {
+  Male
+  Female
+  Other
+}
+
+model person_links {
+  id         BigInt   @id @default(autoincrement())
+  person_id  BigInt
+  persons    persons  @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  title      String   @db.VarChar(64)
+  link       String   @db.VarChar(255)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+enum media_type {
+  image
+  video
+}
+
+model person_media {
+  id         BigInt     @id @default(autoincrement())
+  person_id  BigInt
+  persons    persons    @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  name       String     @db.VarChar(64)
+  detail     String     @db.VarChar(255)
+  type       media_type @default(image)
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+}
+
+enum title_types {
+  Movie
+  WebSeries
+  TvSeries
+  ShortMovie
+}
+
+model genres {
+  id               BigInt             @id @default(autoincrement())
+  title            String             @db.VarChar(255)
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  genres_in_titles genres_in_titles[]
+}
+
+model genres_in_titles {
+  genre_id BigInt
+  genres   genres @relation(fields: [genre_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  title_id BigInt
+  titles   titles @relation(fields: [title_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([genre_id, title_id], map: "genre_id_title_id_unique")
+}
+
+model titles {
+  id               BigInt             @id @default(autoincrement())
+  title            String             @db.VarChar(255)
+  slug             String             @db.VarChar(255)
+  details          String             @db.Text()
+  realising_date   DateTime           @db.Date()
+  year             String             @db.VarChar(8)
+  type             title_types        @default(Movie)
+  created_at       DateTime           @default(now())
+  updated_at       DateTime           @updatedAt
+  genres_in_titles genres_in_titles[]
+}
