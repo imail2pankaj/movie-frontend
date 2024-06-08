@@ -42,3 +42,27 @@ export const getPopularPersons = async (personTypes) => {
     return error
   }
 }
+
+
+export async function getPersonBySlug(slug) {
+  const person = await prisma.persons.findFirst({
+    where: { slug, status: "Publish" },
+    include: {
+      person_types_in_persons: {
+        include: {
+          person_types: true
+        }
+      },
+      person_links: true
+    },
+  })
+
+  return {
+    ...person,
+    person_types_in_persons: [],
+    person_type_id: person?.person_types_in_persons?.map(ptype => ({
+      label: ptype.person_types.title,
+      value: Number(ptype.person_types.id),
+    }))
+  };
+}
