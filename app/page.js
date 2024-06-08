@@ -2,6 +2,7 @@
 import { getPopularPersons } from "@/actions/common.action";
 import HeroSection from "./_components/Home/HeroSection";
 import PopularMovies from "./_components/Home/PopularMovies";
+import PopularPersons from "./_components/Home/PopularPersons";
 
 export const metadata = {
   title: "MovieMania: Your Ultimate Movie Database",
