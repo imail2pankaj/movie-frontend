@@ -1,11 +1,7 @@
 
-import Link from "next/link"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
 import { getPopularPersons } from "@/actions/common.action";
 import HeroSection from "./_components/Home/HeroSection";
 import PopularMovies from "./_components/Home/PopularMovies";
-import PopularPersons from "./_components/Home/PopularPersons";
 
 export const metadata = {
   title: "MovieMania: Your Ultimate Movie Database",
@@ -26,7 +22,7 @@ export default async function Home() {
     <div>
       <HeroSection />
       <PopularMovies movies={movies} />
-      <PopularPersons persons={persons} />
+      <PopularPer sons persons={persons} />
     </div>
   )
 }
