@@ -21,7 +21,7 @@ export async function generateMetadata({ params }, parent) {
 
 const Peoples = async () => {
 
-  // const persons = await fetchFilteredPersons({});
+  const persons = await fetchFilteredPersons({});
 
   return (
     <>
