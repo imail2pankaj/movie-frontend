@@ -20,8 +20,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" /> */}
-        <meta name="google-site-verification" content="41lOQ8NMi_1WXdvkthi43EMzzMiuAKxFqSohf3v8pFU" />
+        <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" />
         <meta name="google-adsense-account" content="ca-pub-6282693958918202" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202"
           crossorigin="anonymous"></script>
