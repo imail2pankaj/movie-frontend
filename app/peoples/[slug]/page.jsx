@@ -1,10 +1,9 @@
 import { getPersonBySlug } from '@/actions/common.action'
 import { Badge } from '@/components/ui/badge';
 import { getImageURL } from '@/lib/functions';
-import { parseDate } from '@/lib/utils';
 import Image from 'next/image';
 
-export async function generateMetadata({ params, searchParams }, parent) {
+export async function generateMetadata({ params }, parent) {
 
   const slug = params.slug
 
