@@ -1,6 +1,7 @@
 import { fetchFilteredPersons } from '@/actions/person.action'
 import PersonCard from '@/components/PersonCard'
 import React from 'react'
+import FilterBar from './_component/FilterBar'
 
 
 export async function generateMetadata({ params }, parent) {
@@ -9,10 +10,10 @@ export async function generateMetadata({ params }, parent) {
   const previousImages = (await parent).openGraph?.images || []
 
   return {
-    title: "Peoples",
+    title: "Meet the Stars Behind the Scenes",
     openGraph: {
-      title: "Peoples",
-      description: "Peoples",
+      title: "Meet the Stars Behind the Scenes",
+      description: "Step into the limelight with Spotlight Central, your exclusive access to the world's most talented actors, visionary directors, and innovative producers. Discover the faces that shape our stories and the minds that bring them to life. Connect with the creators, explore their works, and find inspiration in every frame. Join us at Movie Masti Magic – where every role matters, and every story counts",
       images: [...previousImages],
     },
   }
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }, parent) {
 
 const Peoples = async () => {
 
-  const persons = await fetchFilteredPersons({});
+  // const persons = await fetchFilteredPersons({});
 
   return (
     <>
@@ -29,6 +30,7 @@ const Peoples = async () => {
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">Peoples</h1>
         </div>
       </section>
+      <FilterBar />
       <section className="py-3 md:py-4 lg:py-5">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">

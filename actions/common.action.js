@@ -66,3 +66,11 @@ export async function getPersonBySlug(slug) {
     }))
   };
 }
+
+export const getPersonTypes = async () => {
+  try {
+    return await prisma.person_types.findMany();
+  } catch (error) {
+    return error
+  }
+}
