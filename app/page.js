@@ -22,7 +22,7 @@ export default async function Home() {
     <div>
       <HeroSection />
       <PopularMovies movies={movies} />
-      <PopularPer sons persons={persons} />
+      <PopularPersons persons={persons} />
     </div>
   )
 }
