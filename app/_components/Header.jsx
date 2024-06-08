@@ -1,11 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 
 const Header = () => {
   return (
     <header className="container px-4 lg:px-6 py-4 flex items-center">
-      <Link href="#" className="flex items-center justify-center" prefetch={false}>
+      <Link href="/" className="flex items-center justify-center" prefetch={false}>
         <Image src={`/icons/logo.png`} height={60} width={60} alt="Movie Database Logo" />
         <span className="sr-only">Movie Database</span>
       </Link>
@@ -16,7 +15,7 @@ const Header = () => {
         <Link href="/shows" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
           TV Shows
         </Link>
-        <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+        <Link href="/peoples" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
           Peoples
         </Link>
         <Link href="#" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
