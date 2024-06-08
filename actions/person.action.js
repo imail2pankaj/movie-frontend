@@ -22,7 +22,7 @@ const buildQuery = ({ query, status, person_type_id }) => {
     // });
   });
 
-  const where = {status:"Publish"};
+  const where = { status: "Publish" };
   if (query) {
     where["OR"] = queryBuilder;
   }
@@ -140,7 +140,7 @@ export async function getPersons() {
   });
 }
 
-export async function fetchFilteredPersons({query = "", currentPage = 1, column = 'created_at', sort = 'desc', pageSize = 12}) {
+export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', pageSize = 12 }) {
 
   return await prisma.persons.findMany({
     select: {
@@ -207,4 +207,19 @@ export async function getPerson(id) {
       value: Number(ptype.person_types.id),
     }))
   };
+}
+
+
+export async function fetchSitemapPersons() {
+
+  return await prisma.persons.findMany({
+    select: {
+      id: true,
+      slug: true,
+      created_at: true,
+    },
+    where: { status: "Publish" },
+    take: 1000,
+    orderBy: { id: "asc" },
+  });
 }
