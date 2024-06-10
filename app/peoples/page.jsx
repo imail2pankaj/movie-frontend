@@ -20,8 +20,8 @@ export async function generateMetadata({ params }, parent) {
 }
 
 const Peoples = async () => {
-
-  const persons = await fetchFilteredPersons({});
+  
+  // const persons = await fetchFilteredPersons({});
 
   return (
     <>
@@ -31,13 +31,13 @@ const Peoples = async () => {
         </div>
       </section>
       <FilterBar />
-      <section className="py-3 md:py-4 lg:py-5">
+      {/* <section className="py-3 md:py-4 lg:py-5">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
             {persons.map((person) => <PersonCard key={person.id} person={person} />)}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

@@ -15,13 +15,24 @@ import { useState } from "react"
 const PeopleType = ({ types }) => {
 
   const [filteredTypes, setFilteredTypes] = useState(types)
+  const [selected, setSelected] = useState([]);
+
+  const handleChange = (e) => {
+    console.log(e.target.value, e.target.checked)
+    if(e.target.checked) {
+      setSelected(x => [...x, ...(types.filter(t => Number(t.id) === Number(e.target.value)))])
+    } else {
+      setSelected(x => x.filter(s => Number(s.id) !== Number(e.target.value)))
+      // console.log(selected.filter(s => Number(s.id) !== Number(e.target.value)))
+    }
+  }
 
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button variant="outline">
-          <PlusCircle size={'xs'} className="me-2" />
-          People Type
+          <PlusCircle size={'sm'} className="me-2" />
+          People Type {selected.length}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-60 p-0 rounded-none">
@@ -41,21 +52,24 @@ const PeopleType = ({ types }) => {
           />
         </div>
         <hr />
-        {filteredTypes.length > 0 && <div className="grid gap-4 h-full max-h-60 p-2 overflow-y-auto">
-          {
-            filteredTypes.map(x => (
-              <div key={`types-${x.id}`} className="flex items-center space-x-2">
-                <Checkbox id={`types-${x.id}`} />
-                <label
-                  htmlFor={`types-${x.id}`}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  {x.title}
-                </label>
-              </div>
-            ))
-          }
-        </div>}
+        <div className="p-1">
+          {filteredTypes.length > 0 && <div className="grid gap-4 h-full max-h-60 p-2 overflow-y-auto">
+            {
+              filteredTypes.map(x => (
+                <div key={`types-${x.id}`} className="flex items-center space-x-2">
+                  <input type="checkbox" id={`types-${x.id}`} checked={selected.find(s => Number(s.id) === Number(x.id))} value={`${x.id}`} onChange={handleChange} />
+                  <label
+                    htmlFor={`types-${x.id}`}
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    {x.title}
+                  </label>
+                </div>
+              ))
+            }
+          </div>}
+          {selected.length > 0 && <Button onClick={() => setSelected(x => x.filter(s => false))} className="w-full" variant="outlined">Clear Filter</Button>}
+        </div>
       </PopoverContent>
     </Popover>
   )
