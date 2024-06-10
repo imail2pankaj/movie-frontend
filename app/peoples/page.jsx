@@ -2,6 +2,7 @@ import { fetchFilteredPersons } from '@/actions/person.action'
 import PersonCard from '@/components/PersonCard'
 import React from 'react'
 import FilterBar from './_component/FilterBar'
+import { getPersonTypes } from '@/actions/common.action'
 
 
 export async function generateMetadata({ params }, parent) {
@@ -22,6 +23,7 @@ export async function generateMetadata({ params }, parent) {
 const Peoples = async () => {
   
   // const persons = await fetchFilteredPersons({});
+  const types = await getPersonTypes({});
 
   return (
     <>
@@ -30,7 +32,7 @@ const Peoples = async () => {
           <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">Peoples</h1>
         </div>
       </section>
-      <FilterBar />
+      <FilterBar types={types} />
       {/* <section className="py-3 md:py-4 lg:py-5">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">

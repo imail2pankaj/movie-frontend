@@ -3,6 +3,8 @@ import { getPopularPersons } from "@/actions/common.action";
 import HeroSection from "./_components/Home/HeroSection";
 import PopularMovies from "./_components/Home/PopularMovies";
 import PopularPersons from "./_components/Home/PopularPersons";
+import Browse from "./_components/Home/Browse";
+import SearchSection from "./_components/Home/SearchSection";
 
 export const metadata = {
   title: "MovieMania: Your Ultimate Movie Database",
@@ -21,9 +23,11 @@ export default async function Home() {
 
   return (
     <div>
-      <HeroSection />
-      <PopularMovies movies={movies} />
-      <PopularPersons persons={persons} />
+      {/* <HeroSection /> */}
+      <Browse />
+      <SearchSection />
+      <PopularMovies movies={movies.length ? movies : []} />
+      <PopularPersons persons={persons.length ? persons : []} />
     </div>
   )
 }

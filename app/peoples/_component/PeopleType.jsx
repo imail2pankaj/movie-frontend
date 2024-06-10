@@ -1,78 +1,127 @@
 "use client"
-// import { getPersonTypes } from "@/actions/common.action"
+import * as React from "react"
+import { Check, LucideIcon, PlusCircle } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+} from "@/components/ui/command"
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { PlusCircle, Search } from "lucide-react"
-import { useState } from "react"
+// import { Separator } from "@/components/ui/separator"
 
-const PeopleType = ({ types }) => {
-
-  const [filteredTypes, setFilteredTypes] = useState(types)
-  const [selected, setSelected] = useState([]);
-
-  const handleChange = (e) => {
-    console.log(e.target.value, e.target.checked)
-    if(e.target.checked) {
-      setSelected(x => [...x, ...(types.filter(t => Number(t.id) === Number(e.target.value)))])
-    } else {
-      setSelected(x => x.filter(s => Number(s.id) !== Number(e.target.value)))
-      // console.log(selected.filter(s => Number(s.id) !== Number(e.target.value)))
-    }
-  }
+export default function DataTableFacetedFilter({
+  column,
+  title = "Status",
+  types,
+}) {
+  const [selectedValues, setSelectedValues] = React.useState([]);
 
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline">
-          <PlusCircle size={'sm'} className="me-2" />
-          People Type {selected.length}
+        <Button variant="outline" size="sm" className="h-8 border-dashed">
+          <PlusCircle className="mr-2 h-4 w-4" />
+          {title}
+          {selectedValues?.length > 0 && (
+            <>
+              <Separator orientation="vertical" className="mx-2 h-4" />
+              <Badge
+                variant="secondary"
+                className="rounded-sm px-1 font-normal lg:hidden"
+              >
+                {selectedValues.length}
+              </Badge>
+              <div className="hidden space-x-1 lg:flex">
+                {selectedValues.length > 2 ? (
+                  <Badge
+                    variant="secondary"
+                    className="rounded-sm px-1 font-normal"
+                  >
+                    {selectedValues.length} selected
+                  </Badge>
+                ) : (
+                  types
+                    .filter((option) => selectedValues.filter(x => Number(option.id) === Number(x.id)))
+                    .map((option) => (
+                      <Badge
+                        variant="secondary"
+                        key={option.id}
+                        className="rounded-sm px-1 font-normal"
+                      >
+                        {option.label}
+                      </Badge>
+                    ))
+                )}
+              </div>
+            </>
+          )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-60 p-0 rounded-none">
-        <div className="relative">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
-            onChange={(e) => {
-              const val = e.target.value.trim();
-              const regex = new RegExp(val, "i")
-              if (val.length) { setFilteredTypes(x => types.filter(type => type.title.match(regex))); } else {
-                setFilteredTypes(types)
-              }
-            }}
-            type="search"
-            placeholder="Search people types..."
-            className="w-full appearance-none outline-none border-none focus:outline-none rounded-none bg-background pl-8 shadow-none"
-          />
-        </div>
-        <hr />
-        <div className="p-1">
-          {filteredTypes.length > 0 && <div className="grid gap-4 h-full max-h-60 p-2 overflow-y-auto">
-            {
-              filteredTypes.map(x => (
-                <div key={`types-${x.id}`} className="flex items-center space-x-2">
-                  <input type="checkbox" id={`types-${x.id}`} checked={selected.find(s => Number(s.id) === Number(x.id))} value={`${x.id}`} onChange={handleChange} />
-                  <label
-                    htmlFor={`types-${x.id}`}
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      <PopoverContent className="w-[200px] p-0" align="start">
+        <Command>
+          <CommandInput placeholder={title} />
+          <CommandList>
+            <CommandEmpty>No results found.</CommandEmpty>
+            <CommandGroup>
+              {types.map((option) => {
+                const isSelected = selectedValues.filter(x => Number(option.id) === Number(x.id));
+                return (
+                  <CommandItem
+                    key={option.id}
+                    onSelect={() => {
+                      console.log(isSelected)
+                      if (isSelected) {
+                        setSelectedValues(x => x.filter(s => Number(s.id) !== Number(option.id)))
+                      } else {
+                        setSelectedValues(x => [...x, ...(types.filter(t => Number(t.id) === Number(option.id)))])
+                      }
+
+                    }}
                   >
-                    {x.title}
-                  </label>
-                </div>
-              ))
-            }
-          </div>}
-          {selected.length > 0 && <Button onClick={() => setSelected(x => x.filter(s => false))} className="w-full" variant="outlined">Clear Filter</Button>}
-        </div>
+                    <div
+                      className={cn(
+                        "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary",
+                        isSelected
+                          ? "bg-primary text-primary-foreground"
+                          : "opacity-50 [&_svg]:invisible"
+                      )}
+                    >
+                      <Check className={cn("h-4 w-4")} />
+                    </div>
+                    <span>{option.label}</span>
+                  </CommandItem>
+                )
+              })}
+            </CommandGroup>
+            {selectedValues.length > 0 && (
+              <>
+                {/* <CommandSeparator /> */}
+                <CommandGroup>
+                  <CommandItem
+                    onSelect={() => setSelectedValues([])}
+                    className="justify-center text-center"
+                  >
+                    Clear filters
+                  </CommandItem>
+                </CommandGroup>
+              </>
+            )}
+          </CommandList>
+        </Command>
       </PopoverContent>
     </Popover>
   )
 }
-
-export default PeopleType
+// https://codesandbox.io/p/devbox/vite-shadcn-boilerplate-6vpmrw?file=%2Fsrc%2Fcomponents%2FExampleTable%2Fcomponents%2Fdata-table.tsx%3A80%2C48
