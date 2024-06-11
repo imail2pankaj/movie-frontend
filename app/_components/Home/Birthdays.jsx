@@ -23,17 +23,21 @@ const Birthdays = async () => {
               <div className="col-span-3 sm:col-span-1">
                 <Card className="">
                   <CardContent className="flex flex-col items-center justify-center px-0">
-                    <Image
-                      src={getImageURL("persons", _.image)}
-                      width={300}
-                      height={200}
-                      alt={_.full_name}
-                      className="aspect-[3/4] md:aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    <Link href={`/peoples/${_.slug}`} prefetch={false}>
+                      <Image
+                        src={getImageURL("persons", _.image)}
+                        width={300}
+                        height={200}
+                        alt={_.full_name}
+                        className="aspect-[3/4] md:aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </Link>
                     <div className="mt-4 text-center">
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-gray-50">
-                        {_.full_name}
-                      </h3>
+                      <Link href={`/peoples/${_.slug}`} prefetch={false}>
+                        <h3 className="text-lg font-bold text-gray-900 dark:text-gray-50">
+                          {_.full_name}
+                        </h3>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>
