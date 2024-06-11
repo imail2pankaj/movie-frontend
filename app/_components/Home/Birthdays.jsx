@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel"
 import { getImageURL } from "@/lib/functions";
 import Image from "next/image";
+import Link from "next/link";
 
 const Birthdays = async () => {
   const bdays = await fetchPersonsBirthdayToday();
