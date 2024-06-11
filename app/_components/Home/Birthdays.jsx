@@ -22,7 +22,7 @@ const Birthdays = async () => {
             <CarouselItem key={index} className="pl-1 md:basis-1/2 lg:basis-1/5">
               <div className="col-span-3 sm:col-span-1">
                 <Card className="">
-                  <CardContent className="flex flex-col items-center justify-center px-0 -ml-4">
+                  <CardContent className="flex flex-col items-center justify-center px-0">
                     <Image
                       src={getImageURL("persons", _.image)}
                       width={300}
