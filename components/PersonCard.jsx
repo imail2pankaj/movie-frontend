@@ -16,7 +16,7 @@ const PersonCard = ({ person }) => {
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent group-hover:from-gray-900/60 transition-colors duration-300" />
       <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-900 to-transparent">
         <h3 className="text-lg font-semibold text-white">{person.full_name}</h3>
-        {person.person_types_in_persons.map(type => <Badge key={`${type.person_id}-${type.person_type_id}`} className="me-1 text-xs">{type.person_types.title}</Badge>)}
+        {person.person_types_in_persons && person.person_types_in_persons.map(type => <Badge key={`${type.person_id}-${type.person_type_id}`} className="me-1 text-xs">{type.person_types.title}</Badge>)}
       </div>
     </Link>
   )

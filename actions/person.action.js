@@ -32,12 +32,11 @@ const buildQuery = ({ query, person_type_id }) => {
       some: {
         person_types: {
           id: {
-            in:person_type_id
+            in: person_type_id
           }
         }
       }
     };
-    console.log(JSON.stringify(where))
   }
 
   return where;
@@ -231,4 +230,15 @@ export async function fetchSitemapPersons() {
     take: 1000,
     orderBy: { id: "asc" },
   });
+}
+
+export async function fetchPersonsBirthdayToday() {
+
+  const date = new Date(); // Get the current date
+  const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if needed
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+  const year = date.getFullYear();
+
+  return await prisma.$queryRaw`SELECT id, full_name, slug, born, died, image FROM persons WHERE EXTRACT(MONTH FROM born) = ${month} AND EXTRACT(DAY FROM born) = ${day} AND status = 'Publish'`;
+
 }
