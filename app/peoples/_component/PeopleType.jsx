@@ -19,15 +19,34 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-// import { Separator } from "@/components/ui/separator"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
-export default function DataTableFacetedFilter({
-  column,
-  title = "Status",
+export default function PeopleType({
+  title = "People Types",
   types,
 }) {
-  const [selectedValues, setSelectedValues] = React.useState([]);
 
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
+  const selected = params.has("type") ? params.get("type").split(",").map(Number) : [];
+ 
+  const [selectedValues, setSelectedValues] = React.useState(selected.length > 0 ? types.filter(x => selected.includes(Number(x.id))) : []);
+
+  React.useEffect(() => {
+    if (selectedValues.length) {
+      const param = []
+      selectedValues.map(x => {
+        param.push(x.id);
+      })
+      params.set("type", param.join(","))
+      replace(`${pathname}?${params.toString()}`);
+    } else {
+      params.delete("type")
+    }
+  }, [selectedValues, selected]);
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -36,7 +55,6 @@ export default function DataTableFacetedFilter({
           {title}
           {selectedValues?.length > 0 && (
             <>
-              <Separator orientation="vertical" className="mx-2 h-4" />
               <Badge
                 variant="secondary"
                 className="rounded-sm px-1 font-normal lg:hidden"
@@ -53,7 +71,7 @@ export default function DataTableFacetedFilter({
                   </Badge>
                 ) : (
                   types
-                    .filter((option) => selectedValues.filter(x => Number(option.id) === Number(x.id)))
+                    .filter((option) => selectedValues.find(x => Number(option.id) === Number(x.id)))
                     .map((option) => (
                       <Badge
                         variant="secondary"
@@ -72,16 +90,17 @@ export default function DataTableFacetedFilter({
       <PopoverContent className="w-[200px] p-0" align="start">
         <Command>
           <CommandInput placeholder={title} />
-          <CommandList>
+          <CommandList className="h-40">
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup>
               {types.map((option) => {
-                const isSelected = selectedValues.filter(x => Number(option.id) === Number(x.id));
+                const isSelected = selectedValues.find(x => Number(option.id) === Number(x.id));
+
                 return (
                   <CommandItem
                     key={option.id}
                     onSelect={() => {
-                      console.log(isSelected)
+
                       if (isSelected) {
                         setSelectedValues(x => x.filter(s => Number(s.id) !== Number(option.id)))
                       } else {
@@ -105,20 +124,20 @@ export default function DataTableFacetedFilter({
                 )
               })}
             </CommandGroup>
-            {selectedValues.length > 0 && (
-              <>
-                {/* <CommandSeparator /> */}
-                <CommandGroup>
-                  <CommandItem
-                    onSelect={() => setSelectedValues([])}
-                    className="justify-center text-center"
-                  >
-                    Clear filters
-                  </CommandItem>
-                </CommandGroup>
-              </>
-            )}
           </CommandList>
+          {selectedValues.length > 0 && (
+            <>
+              {/* <CommandSeparator /> */}
+              <CommandGroup>
+                <CommandItem
+                  onSelect={() => setSelectedValues([])}
+                  className="justify-center text-center"
+                >
+                  Clear filters
+                </CommandItem>
+              </CommandGroup>
+            </>
+          )}
         </Command>
       </PopoverContent>
     </Popover>

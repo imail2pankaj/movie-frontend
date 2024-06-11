@@ -28,7 +28,7 @@ const buildQuery = ({ query, status, person_type_id }) => {
   }
 
   if (person_type_id) {
-    where["person_types_in_persons"] = { some: { person_type_id: person_type_id } };
+    where["person_types_in_persons"] = { some: { person_type_id: { in: person_type_id } } };
   }
 
   return where;
@@ -173,16 +173,16 @@ export async function fetchFilteredPersons({ query = "", currentPage = 1, column
   });
 }
 
-export async function fetchFilteredPersonsCount(query, status, person_type_id) {
+export async function fetchFilteredPersonsCount({ query, person_type_id }) {
   return await prisma.persons.count({
-    where: buildQuery({ query, status, person_type_id })
+    where: buildQuery({ query, person_type_id })
   });
 }
 
-export async function fetchFilteredPersonsPagination(query, status, currentPage, column, sort, person_type_id, page_size = 10) {
+export async function fetchFilteredPersonsPagination({ query, currentPage, column, sort, person_type_id, page_size = 10 }) {
   return {
-    persons: await fetchFilteredPersons(query, status, currentPage, column, sort, person_type_id, page_size),
-    totalRecords: await fetchFilteredPersonsCount(query, status, person_type_id)
+    persons: await fetchFilteredPersons({ query, currentPage, column, sort, person_type_id, page_size }),
+    totalRecords: await fetchFilteredPersonsCount({ query, person_type_id })
   };
 }
 
