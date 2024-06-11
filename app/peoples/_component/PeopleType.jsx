@@ -45,6 +45,7 @@ export default function PeopleType({
       replace(`${pathname}?${params.toString()}`);
     } else {
       params.delete("type")
+      replace(`${pathname}?${params.toString()}`);
     }
   }, [selectedValues, selected]);
   return (

@@ -3,7 +3,7 @@
 // import fileUpload, { deleteFile, generateFileName } from "@/lib/file-upload";
 import prisma from "@/lib/prisma";
 
-const buildQuery = ({ query, status, person_type_id }) => {
+const buildQuery = ({ query, person_type_id }) => {
   const querySplit = query.split(" ");
   const queryBuilder = [];
 
@@ -27,8 +27,17 @@ const buildQuery = ({ query, status, person_type_id }) => {
     where["OR"] = queryBuilder;
   }
 
-  if (person_type_id) {
-    where["person_types_in_persons"] = { some: { person_type_id: { in: person_type_id } } };
+  if (person_type_id.length) {
+    where["person_types_in_persons"] = {
+      some: {
+        person_types: {
+          id: {
+            in:person_type_id
+          }
+        }
+      }
+    };
+    console.log(JSON.stringify(where))
   }
 
   return where;
@@ -140,7 +149,7 @@ export async function getPersons() {
   });
 }
 
-export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', pageSize = 12 }) {
+export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, pageSize = 12 }) {
 
   return await prisma.persons.findMany({
     select: {
@@ -166,7 +175,7 @@ export async function fetchFilteredPersons({ query = "", currentPage = 1, column
         }
       }
     },
-    where: buildQuery({ query }),
+    where: buildQuery({ query, person_type_id }),
     skip: currentPage !== 1 ? ((currentPage - 1) * pageSize) : 0,
     take: pageSize,
     orderBy: { [column]: sort },

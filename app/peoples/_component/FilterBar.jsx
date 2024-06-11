@@ -11,7 +11,7 @@ const FilterBar = ({ types }) => {
   const params = new URLSearchParams(searchParams);
   const pathname = usePathname();
   const { replace } = useRouter();
-  
+
   const handleSearch = useDebouncedCallback((term) => {
 
     if (term) {
@@ -23,17 +23,20 @@ const FilterBar = ({ types }) => {
   }, 300);
 
   return (
-    <div className='container flex items-center gap-2'>
-      <Input
-        id={'q'}
-        placeholder={'Search People...'}
-        type={'search'}
-        onChange={(e) => {
-          handleSearch(e.target.value);
-        }}
-        defaultValue={searchParams.get('q')?.toString()}
-      />
-      <PeopleType types={types.map(x => ({ id: x.id, label: x.title }))} />
+    <div className='container px-4 lg:px-8'>
+      <div className='flex justify-start items-center gap-2'>
+        <Input
+          className={'w-40'}
+          id={'q'}
+          placeholder={'Search People...'}
+          type={'search'}
+          onChange={(e) => {
+            handleSearch(e.target.value);
+          }}
+          defaultValue={searchParams.get('q')?.toString()}
+        />
+        <PeopleType types={types.map(x => ({ id: x.id, label: x.title }))} />
+      </div>
     </div>
   )
 }

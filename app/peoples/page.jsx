@@ -1,13 +1,10 @@
-import { fetchFilteredPersons, fetchFilteredPersonsPagination } from '@/actions/person.action'
+import { fetchFilteredPersonsPagination } from '@/actions/person.action'
 import PersonCard from '@/components/PersonCard'
-import React from 'react'
 import FilterBar from './_component/FilterBar'
 import { getPersonTypes } from '@/actions/common.action'
-// import { useSearchParams } from 'next/navigation'
 
 export async function generateMetadata({ params }, parent) {
 
-  // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
   return {
@@ -27,7 +24,7 @@ const Peoples = async ({ searchParams }) => {
   const typeIds = searchParams?.type ? searchParams.type.split(",").map(Number) : [];
 
   const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds });
-// console.log(persons)
+
   const types = await getPersonTypes({});
 
   return (
