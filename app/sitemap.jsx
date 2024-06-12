@@ -26,7 +26,7 @@ export default async function sitemap() {
   ]
   const peoples = await fetchSitemapPersons()
   return [...array, ...peoples.map((people) => ({
-    url: `${BASE_URL}/peoples/${people.slug}`,
+    url: `${BASE_URL}peoples/${people.slug}`,
     lastModified: people.created_at,
     changeFrequency: 'weekly',
   }))]
