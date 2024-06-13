@@ -30,7 +30,7 @@ const Birthdays = async () => {
                         width={300}
                         height={200}
                         alt={_.full_name}
-                        className="aspect-[3/4] md:aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="aspect-[1/1] md:aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     </Link>
                     <div className="mt-4 text-center">
