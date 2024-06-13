@@ -20,10 +20,11 @@ export async function generateMetadata({ params }, parent) {
 const Peoples = async ({ searchParams }) => {
 
   const q = searchParams?.q || "";
+  const born = searchParams?.born || "";
 
   const typeIds = searchParams?.type ? searchParams.type.split(",").map(Number) : [];
 
-  const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds });
+  const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds, born });
 
   const types = await getPersonTypes({});
 

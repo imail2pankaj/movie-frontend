@@ -3,7 +3,7 @@
 // import fileUpload, { deleteFile, generateFileName } from "@/lib/file-upload";
 import prisma from "@/lib/prisma";
 
-const buildQuery = ({ query, person_type_id }) => {
+const buildQuery = ({ query, person_type_id, born }) => {
   const querySplit = query.split(" ");
   const queryBuilder = [];
 
@@ -25,6 +25,13 @@ const buildQuery = ({ query, person_type_id }) => {
   const where = { status: "Publish" };
   if (query) {
     where["OR"] = queryBuilder;
+  }
+
+  if (born) {
+    const currentYear = new Date().getFullYear();
+    const startYear = 1900;
+    const yearsArray = Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
+    where["born"] = { in: yearsArray.map(x => new Date(`${x}-${born}`)) };
   }
 
   if (person_type_id.length) {
@@ -148,7 +155,7 @@ export async function getPersons() {
   });
 }
 
-export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, pageSize = 12 }) {
+export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, born, pageSize = 12 }) {
 
   return await prisma.persons.findMany({
     select: {
@@ -174,23 +181,23 @@ export async function fetchFilteredPersons({ query = "", currentPage = 1, column
         }
       }
     },
-    where: buildQuery({ query, person_type_id }),
+    where: buildQuery({ query, person_type_id, born }),
     skip: currentPage !== 1 ? ((currentPage - 1) * pageSize) : 0,
     take: pageSize,
     orderBy: { [column]: sort },
   });
 }
 
-export async function fetchFilteredPersonsCount({ query, person_type_id }) {
+export async function fetchFilteredPersonsCount({ query, person_type_id, born }) {
   return await prisma.persons.count({
     where: buildQuery({ query, person_type_id })
   });
 }
 
-export async function fetchFilteredPersonsPagination({ query, currentPage, column, sort, person_type_id, page_size = 10 }) {
+export async function fetchFilteredPersonsPagination({ query, currentPage, column, sort, person_type_id, born, page_size = 10 }) {
   return {
-    persons: await fetchFilteredPersons({ query, currentPage, column, sort, person_type_id, page_size }),
-    totalRecords: await fetchFilteredPersonsCount({ query, person_type_id })
+    persons: await fetchFilteredPersons({ query, currentPage, column, sort, person_type_id, born, page_size }),
+    totalRecords: await fetchFilteredPersonsCount({ query, person_type_id, born })
   };
 }
 
@@ -234,9 +241,9 @@ export async function fetchSitemapPersons() {
 
 export async function fetchPersonsBirthdayToday() {
 
-  const date = new Date(); // Get the current date
-  const day = String(date.getDate()).padStart(2, '0'); // Add leading zero if needed
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-indexed
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
   const year = date.getFullYear();
 
   return await prisma.$queryRaw`SELECT id, full_name, slug, born, died, image FROM persons WHERE EXTRACT(MONTH FROM born) = ${month} AND EXTRACT(DAY FROM born) = ${day} AND status = 'Publish'`;

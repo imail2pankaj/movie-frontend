@@ -68,9 +68,11 @@ const PersonalDetail = async ({ params: { slug } }) => {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">About {person.full_name}</h2>
           <div className="grid grid-cols-1 gap-8">
             <div>
-              <p className="text-gray-500 dark:text-gray-400">
-                {person.description.replaceAll("\n", "<br/>")}
-              </p>
+              <p className="text-gray-500 dark:text-gray-400"
+                dangerouslySetInnerHTML={{
+                  __html: person.description.replaceAll('\n', '<br/>'),
+                }}
+              />
             </div>
           </div>
         </div>
