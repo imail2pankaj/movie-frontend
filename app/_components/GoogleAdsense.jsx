@@ -7,7 +7,7 @@ const GoogleAdsense = () => {
   return (
     <>
       <ins class="adsbygoogle"
-        style="display:block"
+        style={{ display: "block" }}
         data-ad-client="ca-pub-6282693958918202"
         data-ad-slot="6944255980"
         data-ad-format="auto"
