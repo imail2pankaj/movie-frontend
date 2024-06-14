@@ -12,6 +12,7 @@ const Browse = () => {
             width="550"
             height="825"
             alt="Movie Poster"
+            loading='lazy'
             className="mx-auto aspect-[2/3] overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"
           />
           <div className="flex flex-col justify-center space-y-4">
