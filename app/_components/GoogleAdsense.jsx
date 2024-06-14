@@ -12,7 +12,7 @@ const GoogleAdsense = () => {
         data-ad-slot="6944255980"
         data-ad-format="auto"
         data-full-width-responsive="true"></ins>
-      <Script dangerouslySetInnerHTML={{ __html: "(window.adsbygoogle = window.adsbygoogle || []).push({});" }} />
+      <Script id="adcode-id" dangerouslySetInnerHTML={{ __html: "(window.adsbygoogle = window.adsbygoogle || []).push({});" }} />
     </>
   );
 };
