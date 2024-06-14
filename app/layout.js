@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import Header from "./_components/Header";
 import GoogleAdsense from "./_components/GoogleAdsense";
 import Script from "next/script";
+import Footer from "./_components/Footer";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -37,8 +38,6 @@ export default function RootLayout({ children }) {
       {process.env.NODE_ENV === 'production' && <head>
         <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" />
         <meta name="google-adsense-account" content="ca-pub-6282693958918202" />
-        {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202"
-          crossorigin="anonymous"></script> */}
         <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202" crossOrigin="anonymous" strategy="lazyOnload" />
       </head>}
       <body
@@ -52,6 +51,7 @@ export default function RootLayout({ children }) {
           <main className="flex-1">
             {children}
           </main>
+          <Footer />
         </div>
         <GoogleAdsense />
       </body>

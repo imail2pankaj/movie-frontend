@@ -8,7 +8,7 @@ const Browse = () => {
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <Image
-            src="/placeholder.svg"
+            src="/placeholder.webp"
             width="550"
             height="825"
             alt="Movie Poster"
@@ -19,7 +19,7 @@ const Browse = () => {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
                 Discover the Best Movies and Actors
               </h1>
-              <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+              <p className="max-w-[600px] text-gray-800 md:text-xl dark:text-gray-400">
                 Browse our extensive movie and actor database to find the perfect entertainment for your next movie
                 night.
               </p>

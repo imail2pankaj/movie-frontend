@@ -35,7 +35,7 @@ const Birthdays = async () => {
             <Carousel className="w-full">
               <CarouselContent className="-ml-1">
                 {bdays.map((_, index) => (
-                  <CarouselItem key={index} className="mx-1 pl-1 md:basis-1/2 lg:basis-1/5">
+                  <CarouselItem key={index} className="mx-1 pl-1 basis-1 md:basis-1/2 lg:basis-1/5">
                     <div className="col-span-3 sm:col-span-1">
                       <Card className="">
                         <CardContent className="flex flex-col items-center justify-center px-0">
@@ -64,9 +64,7 @@ const Birthdays = async () => {
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
-
-
-            <Button className="my-4">
+            <Button className="my-4 p-4">
               <Link href={`/peoples?born=${(new Date()).toLocaleString('default', { month: '2-digit' })}-${(new Date().getDate())}`} className="btn-primary">View All</Link>
             </Button>
           </div>

@@ -8,7 +8,7 @@ const HeroSection = () => {
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
         <Image
-          src="/placeholder.svg"
+          src="/placeholder.webp"
           width={600}
           height={900}
           alt="Movie Poster"
@@ -24,7 +24,7 @@ const HeroSection = () => {
             <Input
               type="text"
               placeholder="Search for a movie, TV show, actor, or director"
-              className="max-w-lg flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-[#87ceeb] dark:focus:ring-gray-300"
+              className="max-w-lg flex-1 px-4 py-2 rounded-md border border-gray-300 dark:border-gray-700 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-[#87ceeb] dark:focus:ring-gray-300"
             />
             <Button size="lg" className="w-full min-[400px]:w-auto">
               Search
