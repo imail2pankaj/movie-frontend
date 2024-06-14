@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { cn } from "@/lib/utils"
 import Header from "./_components/Header";
+import GoogleAdsense from "./_components/GoogleAdsense";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -50,6 +51,7 @@ export default function RootLayout({ children }) {
             {children}
           </main>
         </div>
+        <GoogleAdsense pId="6282693958918202" />
       </body>
     </html>
   );

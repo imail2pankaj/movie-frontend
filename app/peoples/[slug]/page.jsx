@@ -121,8 +121,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
             {person.person_links.map((link) => (
               <Card key={link.id}>
                 <CardHeader>
-                  <CardTitle>{link.title}</CardTitle>
-                  <CardDescription><Link target='_blnk' href={link.link}>{link.link}</Link></CardDescription>
+                  <CardTitle><Link target='_blnk' href={link.link}>{link.title}</Link></CardTitle>
                 </CardHeader>
               </Card>
             ))}
