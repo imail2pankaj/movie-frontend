@@ -65,7 +65,7 @@ const Birthdays = async () => {
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
-            <Button className="my-8 p-4">
+            <Button asChild className="my-8 p-4">
               <Link href={`/peoples?born=${(new Date()).toLocaleString('default', { month: '2-digit' })}-${(new Date().getDate())}`} className="btn-primary">View All</Link>
             </Button>
           </div>
