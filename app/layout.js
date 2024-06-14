@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
         <meta name="google-adsense-account" content="ca-pub-6282693958918202" />
         {/* <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202"
           crossorigin="anonymous"></script> */}
-        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js" crossOrigin="anonymous" strategy="lazyOnload" />
+        <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202" crossOrigin="anonymous" strategy="lazyOnload" />
       </head>}
       <body
         className={cn(
