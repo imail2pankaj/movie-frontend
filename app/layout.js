@@ -18,7 +18,7 @@ export const metadata = {
   template: '%s | MMM : Movie - Magic - Mania',
   default: 'MMM : Movie - Magic - Mania',
   robots: {
-    index: false,
+    index: true,
     follow: true,
     nocache: true,
     googleBot: {

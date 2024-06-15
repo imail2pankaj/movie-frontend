@@ -13,7 +13,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Birthdays = async () => {
-  const bdays = await fetchPersonsBirthdayToday();
+  
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  
+  const bdays = await fetchPersonsBirthdayToday(day, month);
 
   if (!bdays) {
     return null;

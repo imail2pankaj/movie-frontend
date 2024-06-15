@@ -81,7 +81,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-8">Personal Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {person.nick_names.trim() && <Card>
+            {person.nick_names?.trim() && <Card>
               <CardHeader>
                 <CardTitle>Other Names</CardTitle>
                 <CardDescription>{person.nick_names}</CardDescription>
@@ -93,7 +93,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
                 <CardDescription>{parseDate(person.born)} | {person.birth_place}</CardDescription>
               </CardHeader>
             </Card>
-            {person.birth_name.trim() && <Card>
+            {person.birth_name?.trim() && <Card>
               <CardHeader>
                 <CardTitle>Birth Name</CardTitle>
                 <CardDescription>{person.birth_name}</CardDescription>
@@ -105,7 +105,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
                 <CardDescription>{parseDate(person.died)} | {person.death_place}</CardDescription>
               </CardHeader>
             </Card>}
-            {person.height.trim() && <Card>
+            {person.height?.trim() && <Card>
               <CardHeader>
                 <CardTitle>Height</CardTitle>
                 <CardDescription>{person.height}</CardDescription>
