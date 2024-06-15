@@ -23,9 +23,9 @@ const Birthdays = async () => {
     <div className="container mb-4">
       <div className="flex flex-col items-center justify-center space-y-4 text-center">
         <div className="space-y-2">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Birthdays</h2>
+          <h2 className="text-2xl font-bold tracking-tighter sm:text-4xl">Star Birthdays: Celebrate with the Stars</h2>
           <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-            Check out the birthdays peoples on {(new Date().getDate())} {(new Date()).toLocaleString('default', { month: 'long' })} in our database.
+            Discover which celebs are blowing out candles today {(new Date().getDate())} {(new Date()).toLocaleString('default', { month: 'long' })}!
           </p>
         </div>
       </div>
@@ -51,9 +51,9 @@ const Birthdays = async () => {
                           </Link>
                           <div className="mt-4 text-center">
                             <Link href={`/peoples/${_.slug}`} prefetch={false}>
-                              <h4 className="text-md font-bold text-gray-900 dark:text-gray-50">
+                              <h3 className="text-md font-bold text-gray-900 dark:text-gray-50">
                                 {_.full_name}
-                              </h4>
+                              </h3>
                             </Link>
                           </div>
                         </CardContent>
@@ -70,7 +70,7 @@ const Birthdays = async () => {
             </Button>
           </div>
           :
-          <p className="text-center my-8">No birthdays for on this day</p>
+          <p className="text-center my-8">No birthdays for this day</p>
       }
 
     </div>
