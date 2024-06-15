@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { Badge } from './ui/badge'
 import { MotionDiv } from "./MotionDiv";
 
-
 const variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
@@ -12,14 +11,13 @@ const variants = {
 
 const PersonCard = ({ person, index = 1 }) => {
   return (
-
     <Link href={`/peoples/${person.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
       <MotionDiv
         variants={variants}
         initial="hidden"
         animate="visible"
         transition={{
-          delay: index * 0.25,
+          delay: index * 0.2,
           ease: "easeInOut",
           duration: 0.5,
         }}

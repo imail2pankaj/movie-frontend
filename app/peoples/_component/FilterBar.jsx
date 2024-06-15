@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input'
 import PeopleType from './PeopleType'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
+import { Button } from '@/components/ui/button';
 
 const FilterBar = ({ types }) => {
 
@@ -22,6 +23,13 @@ const FilterBar = ({ types }) => {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
 
+  const handleClearAll = () => {
+    params.delete("page")
+    params.delete("q")
+    params.delete("type")
+    replace(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <div className='container px-4 lg:px-8'>
       <div className='flex justify-start items-center gap-2'>
@@ -36,6 +44,7 @@ const FilterBar = ({ types }) => {
           defaultValue={searchParams.get('q')?.toString()}
         />
         <PeopleType types={types.map(x => ({ id: x.id, label: x.title }))} />
+          {/* <Button variant="outline" onClick={() => handleClearAll()}>Clear Filters</Button> */}
       </div>
     </div>
   )
