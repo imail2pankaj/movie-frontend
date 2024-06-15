@@ -155,7 +155,7 @@ export async function getPersons() {
   });
 }
 
-export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, born, pageSize = 12 }) {
+export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, born, pageSize = 18 }) {
 
   return await prisma.persons.findMany({
     select: {
