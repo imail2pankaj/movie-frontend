@@ -38,11 +38,12 @@ model users {
 }
 
 model person_types {
-  id                      BigInt                    @id @default(autoincrement())
-  title                   String                    @db.VarChar(255)
-  person_types_in_persons person_types_in_persons[]
-  created_at              DateTime                  @default(now())
-  updated_at              DateTime                  @updatedAt
+  id                                BigInt                    @id @default(autoincrement())
+  title                             String                    @db.VarChar(255)
+  person_types_in_persons           person_types_in_persons[]
+  persons_in_person_type_in_titles  persons_in_person_type_in_titles[]
+  created_at                        DateTime                  @default(now())
+  updated_at                        DateTime                  @updatedAt
 }
 
 model person_types_in_persons {
@@ -80,11 +81,16 @@ model persons {
   created_at              DateTime                  @default(now())
   updated_at              DateTime                  @updatedAt
   person_media            person_media[]
+  persons_in_person_type_in_titles  persons_in_person_type_in_titles[]
 
   @@index([status,full_name, slug, gender])
 }
 
 enum person_status {
+  Draft
+  Publish
+}
+enum title_status {
   Draft
   Publish
 }
@@ -145,15 +151,48 @@ model genres_in_titles {
   @@unique([genre_id, title_id], map: "genre_id_title_id_unique")
 }
 
+
+enum person_as_roles {
+  Director
+  Producer
+  Stars
+  Cast
+  Writer
+  Music
+  Casting
+  Makeup
+}
+model persons_in_person_type_in_titles {
+  person_id       BigInt
+  persons         persons @relation(fields: [person_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  title_id        BigInt
+  titles          titles @relation(fields: [title_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  person_type_id  BigInt
+  person_types    person_types @relation(fields: [person_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  title           String?  @db.VarChar(255)
+  credit          Int?     @default(0)
+  as_role         person_as_roles @default(Director)
+
+  @@unique([person_id, person_type_id, title_id], map: "person_id_person_type_id_title_id_unique")
+}
+
 model titles {
-  id               BigInt             @id @default(autoincrement())
-  title            String             @db.VarChar(255)
-  slug             String             @db.VarChar(255)
-  details          String             @db.Text()
-  realising_date   DateTime           @db.Date()
-  year             String             @db.VarChar(8)
-  type             title_types        @default(Movie)
-  created_at       DateTime           @default(now())
-  updated_at       DateTime           @updatedAt
-  genres_in_titles genres_in_titles[]
+  id                                BigInt             @id @default(autoincrement())
+  title                             String             @db.VarChar(255)
+  slug                              String             @db.VarChar(255)
+  image                             String             @db.VarChar(255)
+  details                           String             @db.Text()
+  story                             String?            @db.Text()
+  release_date                      DateTime           @db.Date()
+  year                              String             @db.VarChar(8)
+  run_time                          String?            @db.VarChar(16)
+  type                              title_types        @default(Movie)
+  status                            title_status       @default(Draft)
+  created_at                        DateTime           @default(now())
+  updated_at                        DateTime           @updatedAt
+  genres_in_titles                  genres_in_titles[]
+  persons_in_person_type_in_titles  persons_in_person_type_in_titles[]
+
+  @@index([status,title, slug])
 }

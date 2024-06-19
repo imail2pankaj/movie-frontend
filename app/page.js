@@ -1,5 +1,5 @@
 
-import { getPopularPersons } from "@/actions/common.action";
+import { getPopularMovies, getPopularPersons } from "@/actions/common.action";
 import HeroSection from "./_components/Home/HeroSection";
 import PopularMovies from "./_components/Home/PopularMovies";
 import PopularPersons from "./_components/Home/PopularPersons";
@@ -20,7 +20,7 @@ export default async function Home() {
 
   const persons = await getPopularPersons(["Actress","Actor"]);
 
-  const movies = await getPopularPersons(["Producer"]);
+  const movies = await getPopularMovies();
 
   return (
     <div>

@@ -1,3 +1,5 @@
+"use client"
+
 import { fetchPersonsBirthdayToday } from "@/actions/person.action";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card"
@@ -11,14 +13,25 @@ import {
 import { getImageURL } from "@/lib/functions";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import BirthdayCarousel from "./BirthdayCarousel";
 
-const Birthdays = async () => {
-  
+const Birthdays = () => {
+  const [bdays, setBdays] = useState([])
+
   const date = new Date();
   const day = String(date.getDate()).padStart(2, '0');
   const month = String(date.getMonth() + 1).padStart(2, '0');
-  
-  const bdays = await fetchPersonsBirthdayToday(day, month);
+
+  useEffect(() => {
+
+    const getBdays = async () => {
+      const b = await fetchPersonsBirthdayToday(day, month);
+      setBdays(b)
+    }
+    getBdays()
+  }, [day, month])
+
 
   if (!bdays) {
     return null;
@@ -37,7 +50,8 @@ const Birthdays = async () => {
       {
         bdays.length > 0 ?
           <div className=" p-6 text-center">
-            <Carousel className="w-full">
+            <BirthdayCarousel bdays={bdays} />
+            {/* <Carousel className="w-full">
               <CarouselContent className="-ml-1">
                 {bdays.map((_, index) => (
                   <CarouselItem key={index} className="mx-1 pl-1 basis-1/1 md:basis-1/2 lg:basis-1/5">
@@ -69,7 +83,7 @@ const Birthdays = async () => {
               </CarouselContent>
               <CarouselPrevious />
               <CarouselNext />
-            </Carousel>
+            </Carousel> */}
             <Button asChild className="my-8 p-4">
               <Link href={`/peoples?born=${(new Date()).toLocaleString('default', { month: '2-digit' })}-${(new Date().getDate())}`} className="btn-primary">View All</Link>
             </Button>

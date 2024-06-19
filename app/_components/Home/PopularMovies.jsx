@@ -1,3 +1,4 @@
+import MovieCard from '@/components/MovieCard'
 import PersonCard from '@/components/PersonCard'
 
 const PopularMovies = ({ movies }) => {
@@ -13,7 +14,7 @@ const PopularMovies = ({ movies }) => {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-          {movies.map((person) => <PersonCard key={person.id} person={person} />)}
+          {movies.map((movie) => <MovieCard key={movie.id} title={movie} />)}
         </div>
       </div>
     </section>

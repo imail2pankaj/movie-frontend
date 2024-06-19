@@ -74,3 +74,29 @@ export const getPersonTypes = async () => {
     return error
   }
 }
+
+
+export async function getPopularMovies() {
+
+  return await prisma.titles.findMany({
+    select: {
+      id: true,
+      title: true,
+      type: true,
+      created_at: true,
+      status: true,
+      slug: true,
+      image: true,
+      release_date: true,
+      // include: {
+        // genres_in_titles: {
+        //   include: {
+        //     genres: true
+        //   }
+        // },
+      // },
+    },
+    where: { status: "Publish" },
+    take: 4
+  });
+}
