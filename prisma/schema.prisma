@@ -184,7 +184,7 @@ model titles {
   image                             String             @db.VarChar(255)
   details                           String             @db.Text()
   story                             String?            @db.Text()
-  release_date                      DateTime           @db.Date()
+  release_date                      DateTime?          @db.Date()
   year                              String             @db.VarChar(8)
   run_time                          String?            @db.VarChar(16)
   type                              title_types        @default(Movie)
