@@ -154,3 +154,18 @@ export async function getRecordBySlug(slug) {
     director_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Director')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name }))
   };
 }
+
+
+export async function fetchSitemapMovies() {
+
+  return await prisma.titles.findMany({
+    select: {
+      id: true,
+      slug: true,
+      created_at: true,
+    },
+    where: { status: "Publish" },
+    take: 1000,
+    orderBy: { id: "asc" },
+  });
+}
