@@ -57,7 +57,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
                 {person.bio}
               </p>
               <div className="flex items-center gap-2 mt-4">
-                {person.person_type_id.map(x => <Link href={`/peoples?type=${x.value}`}><Badge className="me-1 text-xs" key={x.value}>{x.label}</Badge></Link>)}
+                {person.person_type_id.map(x => <Link key={x.value} href={`/peoples?type=${x.value}`}><Badge className="me-1 text-xs">{x.label}</Badge></Link>)}
               </div>
             </div>
           </div>
