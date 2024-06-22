@@ -33,9 +33,16 @@ export default async function sitemap() {
   ]
   const movies = await fetchSitemapMovies()
   const peoples = await fetchSitemapPersons()
-  return [...array, ...movies, ...peoples.map((people) => ({
-    url: `${BASE_URL}peoples/${people.slug}`,
-    lastModified: people.created_at,
-    changeFrequency: 'monthly',
-  }))]
+  return [
+    ...array,
+    ...movies.map((x) => ({
+      url: `${BASE_URL}movies/${x.slug}`,
+      lastModified: x.created_at,
+      changeFrequency: 'monthly',
+    })),
+    ...peoples.map((x) => ({
+      url: `${BASE_URL}peoples/${x.slug}`,
+      lastModified: x.created_at,
+      changeFrequency: 'monthly',
+    }))]
 }
