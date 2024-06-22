@@ -1,3 +1,4 @@
+import AdBanner from '@/components/AdSense/AdBanner'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -43,6 +44,9 @@ const SearchSection = () => {
             </div> */}
           </div>
         </div>
+      </div>
+      <div className='container'>
+        <AdBanner dataAdSlot="7540782661" dataAdFormat="auto" dataFullWidthResponsive={true} pId="ca-pub-6282693958918202" />
       </div>
     </section>
   )
