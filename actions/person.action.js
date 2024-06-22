@@ -3,7 +3,14 @@
 // import fileUpload, { deleteFile, generateFileName } from "@/lib/file-upload";
 import prisma from "@/lib/prisma";
 
-const buildQuery = ({ query, person_type_id, born }) => {
+const from1900ToCurrentYearsArray = () => {
+  const currentYear = new Date().getFullYear();
+  const startYear = 1900;
+
+  return Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
+}
+
+const buildQuery = ({ query, person_type_id, born, died }) => {
   const querySplit = query.split(" ");
   const queryBuilder = [];
 
@@ -27,12 +34,18 @@ const buildQuery = ({ query, person_type_id, born }) => {
     where["OR"] = queryBuilder;
   }
 
-  if (born) {
-    const currentYear = new Date().getFullYear();
-    const startYear = 1900;
-    const yearsArray = Array.from({ length: currentYear - startYear + 1 }, (_, index) => startYear + index);
-    where["born"] = { in: yearsArray.map(x => new Date(`${x}-${born}`)) };
+  if (born || died) {
+    const yearsArray = from1900ToCurrentYearsArray();
+
+    if (born) {
+      where["born"] = { in: yearsArray.map(x => new Date(`${x}-${born}`)) };
+    }
+
+    if (died) {
+      where["died"] = { in: yearsArray.map(x => new Date(`${x}-${died}`)) };
+    }
   }
+
 
   if (person_type_id.length) {
     where["person_types_in_persons"] = {
@@ -155,7 +168,7 @@ export async function getPersons() {
   });
 }
 
-export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, born, pageSize = 12 }) {
+export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, born, died = "", pageSize = 12 }) {
 
   return await prisma.persons.findMany({
     select: {
@@ -181,23 +194,23 @@ export async function fetchFilteredPersons({ query = "", currentPage = 1, column
         }
       }
     },
-    where: buildQuery({ query, person_type_id, born }),
+    where: buildQuery({ query, person_type_id, born, died }),
     skip: currentPage !== 1 ? ((currentPage - 1) * pageSize) : 0,
     take: pageSize,
     orderBy: { [column]: sort },
   });
 }
 
-export async function fetchFilteredPersonsCount({ query, person_type_id, born }) {
+export async function fetchFilteredPersonsCount({ query, person_type_id, born, died }) {
   return await prisma.persons.count({
-    where: buildQuery({ query, person_type_id })
+    where: buildQuery({ query, person_type_id, born, died })
   });
 }
 
-export async function fetchFilteredPersonsPagination({ query, currentPage, column, sort, person_type_id, born, page_size = 10 }) {
+export async function fetchFilteredPersonsPagination({ query, currentPage, column, sort, person_type_id, born, died, page_size = 10 }) {
   return {
-    persons: await fetchFilteredPersons({ query, currentPage, column, sort, person_type_id, born, page_size }),
-    totalRecords: await fetchFilteredPersonsCount({ query, person_type_id, born })
+    persons: await fetchFilteredPersons({ query, currentPage, column, sort, person_type_id, born, died, page_size }),
+    totalRecords: await fetchFilteredPersonsCount({ query, person_type_id, born, died })
   };
 }
 

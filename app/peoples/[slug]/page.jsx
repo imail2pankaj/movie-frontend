@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { getImageURL } from '@/lib/functions';
-import { parseDate } from '@/lib/utils';
+import { parseDate, queryParseDate } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -22,11 +22,11 @@ export async function generateMetadata({ params }, parent) {
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
-
+  const title = person.person_type_id.map(x => `Popular ${x.label} ${person.full_name}, Best ${x.label} ${person.full_name}`)
   return {
-    title: person.full_name,
+    title: title.join(" | "),
     openGraph: {
-      title: person.full_name,
+      title: title.join(" | "),
       description: person.description,
       images: [getImageURL("persons", person.image), ...previousImages],
     },
@@ -45,7 +45,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
             <div className="w-48 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-gray-800 dark:border-gray-700">
               <Image
                 src={getImageURL("persons", person.image)}
-                alt={person.full_name}
+                alt={person.person_type_id.map(x => `Popular ${x.label} ${person.full_name}, Best ${x.label} ${person.full_name}`).join(" | ")}
                 width={192}
                 height={192}
                 className="w-full h-full object-cover"
@@ -57,7 +57,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
                 {person.bio}
               </p>
               <div className="flex items-center gap-2 mt-4">
-                {person.person_type_id.map(x => <Badge className="me-1 text-xs" key={x.value}>{x.label}</Badge>)}
+                {person.person_type_id.map(x => <Link href={`/peoples?type=${x.value}`}><Badge className="me-1 text-xs" key={x.value}>{x.label}</Badge></Link>)}
               </div>
             </div>
           </div>
@@ -90,7 +90,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
             <Card>
               <CardHeader>
                 <CardTitle>Born</CardTitle>
-                <CardDescription>{parseDate(person.born)} | {person.birth_place}</CardDescription>
+                <CardDescription><Link href={`/peoples?born=${queryParseDate(person.born)}`}>{parseDate(person.born)}</Link> | {person.birth_place}</CardDescription>
               </CardHeader>
             </Card>
             {person.birth_name?.trim() && <Card>
@@ -102,7 +102,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
             {person.died && <Card>
               <CardHeader>
                 <CardTitle>Died</CardTitle>
-                <CardDescription>{parseDate(person.died)} | {person.death_place}</CardDescription>
+                <CardDescription><Link href={`/peoples?died=${queryParseDate(person.died)}`}>{parseDate(person.died)}</Link> | {person.death_place}</CardDescription>
               </CardHeader>
             </Card>}
             {person.height?.trim() && <Card>

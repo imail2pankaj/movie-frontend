@@ -59,6 +59,7 @@ export async function fetchFilteredRecords({ query, type, released_year, current
       title: true,
       type: true,
       created_at: true,
+      released_year: true,
       status: true,
       slug: true,
       image: true,

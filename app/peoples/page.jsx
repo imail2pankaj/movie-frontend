@@ -9,9 +9,10 @@ const Peoples = async ({ searchParams }) => {
 
   const q = searchParams?.q || '';
   const born = searchParams?.born || '';
+  const died = searchParams?.died || '';
   const typeIds = searchParams?.type ? searchParams.type.split(',').map(Number) : [];
 
-  const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds, born, currentPage: 1 });
+  const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds, born, died, currentPage: 1 });
 
   const types = await getPersonTypes({});
 
@@ -37,7 +38,7 @@ const Peoples = async ({ searchParams }) => {
             })}
           </div>
         </div>
-        <LoadMore key={q + born + typeIds.join()} q={q} born={born} typeIds={typeIds} />
+        <LoadMore key={q + died + born + typeIds.join()} q={q} born={born} died={died} typeIds={typeIds} />
       </section>
     </>
   );
