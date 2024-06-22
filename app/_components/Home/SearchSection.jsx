@@ -17,11 +17,11 @@ const SearchSection = () => {
             </p>
           </div>
           <div className="w-full max-w-3xl">
-            <form className="flex space-x-2">
-              <Input type="search" placeholder="Search movies..." className="flex-1 bg-white" />
+            <form className="flex space-x-2" action='/movies'>
+              <Input type="search" placeholder="Search movies..." name="q" className="flex-1 bg-white" />
               <Button type="submit">Search</Button>
             </form>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 mt-4 justify-center">
+            {/* <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 mt-4 justify-center">
               <Button variant="outline" size="sm">
                 Action
               </Button>
@@ -40,7 +40,7 @@ const SearchSection = () => {
               <Button variant="outline" size="sm">
                 Romance
               </Button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

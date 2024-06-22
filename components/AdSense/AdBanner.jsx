@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 
 const AdBanner = ({
+  pId,
   dataAdSlot,
   dataAdFormat,
   dataFullWidthResponsive,
@@ -21,7 +22,7 @@ const AdBanner = ({
     <ins
       className="adsbygoogle"
       style={{ display: "block" }}
-      data-ad-client="ca-pub-6282693958918202"
+      data-ad-client={`ca-pub-${pId}`}
       data-ad-slot={dataAdSlot}
       data-ad-format={dataAdFormat}
       data-full-width-responsive={dataFullWidthResponsive.toString()}

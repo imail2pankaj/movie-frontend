@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
           </main>
           <Footer />
         </div>
-        <GoogleAdsense />
+        {/* <GoogleAdsense /> */}
       </body>
     </html>
   );
