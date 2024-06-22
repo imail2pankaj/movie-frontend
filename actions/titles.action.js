@@ -29,7 +29,7 @@ const buildQuery = ({ query, type, release_year, genre_id }) => {
   }
 
   if (release_year) {
-    where["release_year"] = release_year;
+    where["year"] = release_year;
   }
 
   // if (genre_id.length) {
@@ -63,7 +63,7 @@ export async function fetchFilteredRecords({ query, type, released_year, current
       status: true,
       slug: true,
       image: true,
-      release_date: true,
+      // release_date: true,
       // person_types_in_persons: {
       //   select: {
       //     person_type_id: true,

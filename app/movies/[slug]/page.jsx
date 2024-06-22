@@ -1,4 +1,5 @@
 import { getRecordBySlug } from '@/actions/titles.action';
+import MovieJSONLD from '@/components/MovieJSONLD';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -8,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { BASE_URL } from '@/lib/constants';
 import { getImageURL } from '@/lib/functions';
 import { parseDate } from '@/lib/utils';
 import Image from 'next/image';
@@ -37,8 +39,10 @@ const MovieDetails = async ({ params: { slug } }) => {
 
   const record = await getRecordBySlug(slug);
 
+
   return (
     <>
+      <MovieJSONLD record={record} />
       <section className="bg-gray-900 text-white py-6 md:py-8 lg:py-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="flex items-center gap-6">
@@ -135,3 +139,47 @@ const MovieDetails = async ({ params: { slug } }) => {
 }
 
 export default MovieDetails
+
+{/* <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Movie",
+  "actor": [
+    {
+      "@type": "Person",
+      "name": "Johnny Depp"
+    },
+    {
+      "@type": "Person",
+      "name": "Penelope Cruz"
+    },
+    {
+      "@type": "Person",
+      "name": "Ian McShane"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "bestRating": "10",
+    "ratingCount": "200",
+    "ratingValue": "8",
+    "reviewCount": "50"
+  },
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Ted Elliott"
+    },
+    {
+      "@type": "Person",
+      "name": "Terry Rossio"
+    }
+  ],
+  "description": "Jack Sparrow and Barbossa embark on a quest to find the elusive fountain of youth, only to discover that Blackbeard and his daughter are after it too.",
+  "director": {
+    "@type": "Person",
+    "name": "Rob Marshall"
+  },
+  "name": "Pirates of the Carribean: On Stranger Tides (2011)"
+}
+</script> */}
