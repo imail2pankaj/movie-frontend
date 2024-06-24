@@ -6,7 +6,7 @@ import PopularPersons from "./_components/Home/PopularPersons";
 import Browse from "./_components/Home/Browse";
 import SearchSection from "./_components/Home/SearchSection";
 import Birthdays from "./_components/Home/Birthdays";
-import AdBanner from "@/components/AdSense/AdBanner";
+// import AdBanner from "@/components/AdSense/AdBanner";
 
 export const metadata = {
   title: "MovieMania: Your Ultimate Movie Database",
@@ -31,7 +31,7 @@ export default async function Home() {
       <PopularMovies movies={movies.length ? movies : []} />
       <PopularPersons persons={persons.length ? persons : []} />
       <Birthdays />
-      <div className="container"><AdBanner dataAdSlot="6944255980" dataAdFormat="auto" dataFullWidthResponsive={true} pId="ca-pub-6282693958918202" /></div>
+      {/* <div className="container"><AdBanner dataAdSlot="6944255980" dataAdFormat="auto" dataFullWidthResponsive={true} pId="ca-pub-6282693958918202" /></div> */}
     </div>
   )
 }
