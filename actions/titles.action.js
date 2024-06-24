@@ -58,24 +58,16 @@ export async function fetchFilteredRecords({ query, type, released_year, current
       id: true,
       title: true,
       type: true,
+      details: true,
       created_at: true,
-      // released_year: true,
       status: true,
       slug: true,
       image: true,
-      // release_date: true,
-      // person_types_in_persons: {
-      //   select: {
-      //     person_type_id: true,
-      //     person_id: true,
-      //     person_types: {
-      //       select: {
-      //         id: true,
-      //         title: true,
-      //       }
-      //     }
-      //   }
-      // }
+      genres_in_titles: {
+        include: {
+          genres: true
+        }
+      },
     },
     where: buildQuery({ query, type, genre_id }),
     skip: currentPage !== 1 ? ((currentPage - 1) * page_size) : 0,

@@ -9,6 +9,7 @@ export const getPopularPersons = async (personTypes) => {
         id: true,
         full_name: true,
         slug: true,
+        bio: true,
         image: true,
         person_types_in_persons: {
           select: {

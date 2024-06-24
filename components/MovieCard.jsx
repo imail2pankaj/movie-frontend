@@ -10,6 +10,7 @@ const variants = {
 };
 
 const MovieCard = ({ title, index = 1 }) => {
+
   return (
     <Link href={`/movies/${title.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
       <MotionDiv
@@ -31,10 +32,11 @@ const MovieCard = ({ title, index = 1 }) => {
           loading='lazy'
           className="aspect-[3/4] md:aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent group-hover:from-gray-900/60 transition-colors duration-300" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900/100 to-transparent group-hover:from-gray-900/60 transition-colors duration-300" />
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-900 to-transparent">
           <h3 className="text-lg font-semibold text-white">{title.title}</h3>
           {title.genres_in_titles && title.genres_in_titles.map(type => <Badge key={`${type.genre_id}-${type.title_id}`} className="me-1 text-xs">{type.genres.title}</Badge>)}
+          {title?.details && <p className='text-white mt-2 text-sm'>{title?.details.substr(0, 80)}...</p>}
         </div>
       </MotionDiv>
     </Link >

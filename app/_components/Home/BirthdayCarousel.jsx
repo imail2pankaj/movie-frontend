@@ -4,7 +4,7 @@ import { getImageURL } from "@/lib/functions"
 import Image from "next/image"
 import Link from "next/link"
 
-const BirthdayCarousel = ({bdays}) => {
+const BirthdayCarousel = ({ bdays }) => {
   return (
     <Carousel className="w-full">
       <CarouselContent className="-ml-1">
@@ -29,6 +29,7 @@ const BirthdayCarousel = ({bdays}) => {
                         {_.full_name}
                       </h3>
                     </Link>
+                    {_.died ? <p>{(new Date(_.born)).getFullYear()}-{(new Date(_.died)).getFullYear()}</p> : <p>{calculateAge(_.born)}</p>}
                   </div>
                 </CardContent>
               </Card>
@@ -40,6 +41,15 @@ const BirthdayCarousel = ({bdays}) => {
       <CarouselNext />
     </Carousel>
   )
+}
+
+function calculateAge(birthdate) {
+  const today = new Date();
+  const age = today.getFullYear() - birthdate.getFullYear() - (
+    today.getMonth() < birthdate.getMonth() ||
+    (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate())
+  );
+  return age;
 }
 
 export default BirthdayCarousel

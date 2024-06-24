@@ -8,7 +8,7 @@ const Browse = () => {
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <Image
-            src="/placeholder.webp"
+            src="/kalki.jpg"
             width="550"
             height="825"
             alt="Movie Poster"
