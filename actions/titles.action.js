@@ -19,7 +19,7 @@ const buildQuery = ({ query, type, release_year, genre_id }) => {
     // });
   });
 
-  const where = {status: "Publish"};
+  const where = { status: "Publish" };
   if (query) {
     where["OR"] = queryBuilder;
   }
@@ -142,8 +142,8 @@ export async function getRecordBySlug(slug) {
       value: Number(genres.id),
     })),
     persons_in_person_type_in_titles: [],
-    writer_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Writer')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name })),
-    director_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Director')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name }))
+    writer_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Writer')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name, image: per.persons.image })),
+    director_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Director')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name, image: per.persons.image }))
   };
 }
 

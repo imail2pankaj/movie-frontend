@@ -99,3 +99,23 @@ export async function getPopularMovies() {
     take: 4
   });
 }
+
+export async function getUpcomingMovies(date) {
+
+  return await prisma.titles.findMany({
+    include: {
+      genres_in_titles: {
+        include: {
+          genres: true
+        }
+      },
+    },
+    where: {
+      status: "Publish",
+      release_date: {
+        gte: date
+      }
+    },
+    take: 10
+  });
+}

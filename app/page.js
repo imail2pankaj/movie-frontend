@@ -6,6 +6,7 @@ import PopularPersons from "./_components/Home/PopularPersons";
 import Browse from "./_components/Home/Browse";
 import SearchSection from "./_components/Home/SearchSection";
 import Birthdays from "./_components/Home/Birthdays";
+import UpcomingMovies from "./_components/Home/UpcomingMovies";
 // import AdBanner from "@/components/AdSense/AdBanner";
 
 export const metadata = {
@@ -28,6 +29,7 @@ export default async function Home() {
       {/* <HeroSection /> */}
       <Browse />
       <SearchSection />
+      <UpcomingMovies movies={movies.length ? movies : []} />
       <PopularMovies movies={movies.length ? movies : []} />
       <PopularPersons persons={persons.length ? persons : []} />
       <Birthdays />

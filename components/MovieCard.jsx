@@ -9,7 +9,7 @@ const variants = {
   visible: { opacity: 1 },
 };
 
-const MovieCard = ({ title, index = 1 }) => {
+const MovieCard = ({ title, index = 1, isCarosouel = false }) => {
 
   return (
     <Link href={`/movies/${title.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
@@ -30,7 +30,7 @@ const MovieCard = ({ title, index = 1 }) => {
           height={450}
           alt={title.genres_in_titles ? title.genres_in_titles.map(type => `Popular ${type.genres.title} ${title.title} Movie`) : title.title}
           loading='lazy'
-          className="aspect-[3/4] md:aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
+          className={`aspect-[3/4] md:aspect-[2/3] object-cover ${!isCarosouel && "group-hover:scale-105 transition-transform duration-300"}`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/100 to-transparent group-hover:from-gray-900/60 transition-colors duration-300" />
         <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-gray-900 to-transparent">
