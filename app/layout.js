@@ -39,10 +39,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       {process.env.NODE_ENV === 'production' && <head>
-           <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" />
-         <meta name="google-adsense-account" content="ca-pub-6282693958918202" /> 
-         {/* <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202" crossOrigin="anonymous" strategy="afterInteractive" /> */}
-         <AdSense pId="ca-pub-6282693958918202" />
+        <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" />
+        <meta name="google-adsense-account" content="ca-pub-6282693958918202" />
+        <meta name="yandex-verification" content="7cf59f716d6ee84b" />
+        {/* <Script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6282693958918202" crossOrigin="anonymous" strategy="afterInteractive" /> */}
+        <AdSense pId="ca-pub-6282693958918202" />
       </head>}
       <body
         className={cn(
