@@ -134,6 +134,7 @@ export async function getRecordBySlug(slug) {
       }
     },
   })
+
   return {
     ...record,
     genres_in_titles: [],
@@ -142,8 +143,29 @@ export async function getRecordBySlug(slug) {
       value: Number(genres.id),
     })),
     persons_in_person_type_in_titles: [],
-    writer_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Writer')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name, image: per.persons.image })),
-    director_id: (record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Director')).map(per => ({ value: Number(per.persons.id), label: per.persons.full_name, image: per.persons.image }))
+    writer_id: (
+      record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Writer')
+    ).map(per => (
+      {
+        value: Number(per.persons.id),
+        label: per.persons.full_name,
+        image: per.persons.image,
+        slug: per.persons.slug,
+        as_role: per.as_role,
+        title: per.title,
+      }
+    )),
+    director_id: (
+      record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Director')
+    ).map(per => (
+      {
+        value: Number(per.persons.id),
+        label: per.persons.full_name,
+        image: per.persons.image,
+        slug: per.persons.slug,
+        as_role: per.as_role,
+        title: per.title,
+      }))
   };
 }
 

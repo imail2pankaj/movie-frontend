@@ -25,10 +25,12 @@ export async function generateMetadata({ params }, parent) {
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
+  const title = record.genre_id.map(x => `Popular ${x.label} ${record.type} ${record.title}, Best ${x.label} ${record.type} ${record.title}`).join(" | ");
+
   return {
-    title: `Popular Movie - ${record.title}`,
+    title: title,
     openGraph: {
-      title: record.title,
+      title: title,
       description: record.details,
       images: [getImageURL("records", record.image), ...previousImages],
     },
@@ -38,7 +40,7 @@ export async function generateMetadata({ params }, parent) {
 const MovieDetails = async ({ params: { slug } }) => {
 
   const record = await getRecordBySlug(slug);
-
+  // console.log(record)
   return (
     <>
       <MovieJSONLD record={record} />
@@ -48,7 +50,7 @@ const MovieDetails = async ({ params: { slug } }) => {
             <div className="w-48 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-gray-800 dark:border-gray-700">
               <Image
                 src={getImageURL("titles", record.image)}
-                alt={record.title}
+                alt={record.genre_id.map(x => `Popular ${x.label} ${record.title}, Best ${x.label} ${record.title}`).join(" | ")}
                 width={192}
                 height={192}
                 className="w-full h-full object-cover"
@@ -56,7 +58,8 @@ const MovieDetails = async ({ params: { slug } }) => {
             </div>
             <div>
               <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">{record.title}</h1>
-              <p className="text-gray-300 mt-2 text-sm md:text-md lg:text-xl"
+              <p className='text-sm'>({record.year})</p>
+              <p className="text-gray-300 mt-2 text-sm md:text-md lg:text-lg"
                 dangerouslySetInnerHTML={{
                   __html: record.details.replaceAll('\n', '<br/>'),
                 }}>
@@ -95,41 +98,36 @@ const MovieDetails = async ({ params: { slug } }) => {
             {record?.run_time?.trim() && <Card>
               <CardHeader>
                 <CardTitle>Run Time</CardTitle>
-                <CardDescription>{convertRunTime( record.run_time)}</CardDescription>
+                <CardDescription>{convertRunTime(record.run_time)}</CardDescription>
               </CardHeader>
             </Card>}
-            {/* {record?.birth_name?.trim() && <Card>
-              <CardHeader>
-                <CardTitle>Birth Name</CardTitle>
-                <CardDescription>{record.birth_name}</CardDescription>
-              </CardHeader>
-            </Card>}
-            {record?.height?.trim() && <Card>
-              <CardHeader>
-                <CardTitle>Height</CardTitle>
-                <CardDescription>{record.height}</CardDescription>
-              </CardHeader>
-            </Card>} */}
           </div>
         </div>
       </section>
-      {/* {record.person_links.length > 0 && <section className="pb-6 md:pb-8 lg:pb-10">
+      <section className="pb-6 md:pb-8 lg:pb-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-8">External Links</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {record.person_links.map((link) => (
-              <Card key={link.id}>
-                <CardHeader>
-                  <CardTitle><Link target='_blnk' href={link.link}>{link.title}</Link></CardTitle>
-                </CardHeader>
-              </Card>
-            ))}
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-8">Casts & Crew</h3>
+          <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-8">
+            {record.director_id.map((person) => <CastCrewCard person={person} key={person.id} />)}
+            {record.writer_id.map((person) => <CastCrewCard person={person} key={person.id} />)}
           </div>
         </div>
-      </section>} */}
+      </section>
     </>
   )
 }
+const CastCrewCard = ({ person }) =>
+  <Card>
+    <CardHeader className="text-center">
+      <CardTitle>
+        <Link target='_blnk' href={person.slug} className='flex flex-col text-center gap-2'>
+          <Image src={getImageURL("persons", person.image)} height={120} width={120} alt={person.full_name} className='rounded-full aspect-[1/1] object-cover' />
+          <p className='text-sm md:text-md'>{person.label}</p>
+        </Link>
+      </CardTitle>
+      <CardDescription className='text-xs md:text-sm'>{person.as_role}</CardDescription>
+    </CardHeader>
+  </Card>
 
 export default MovieDetails
 

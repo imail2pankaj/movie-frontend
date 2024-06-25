@@ -20,7 +20,7 @@ export const metadata = {
 
 export default async function Home() {
 
-  const persons = await getPopularPersons(["Actress","Actor"]);
+  const persons = await getPopularPersons(["Actress", "Actor"]);
 
   const movies = await getPopularMovies();
 

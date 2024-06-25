@@ -4,49 +4,59 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import MovieCard from '@/components/MovieCard'
 import { useEffect, useState } from "react";
 import { getUpcomingMovies } from "@/actions/common.action";
+import { Skeleton } from "@/components/ui/skeleton"
+import CarouselSkeleton from "@/components/CarouselSkeleton";
+import { getImageURL } from "@/lib/functions";
 
 const UpcomingMovies = () => {
   const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
 
     const loadingUpcomingMovies = async () => {
       const data = await getUpcomingMovies(new Date());
       setMovies(data);
+      setLoading(false)
     }
     loadingUpcomingMovies();
   }, [])
 
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold tracking-tighter sm:text-4xl">Coming Soon</h2>
-            <p className="max-w-[900px] text-gray-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-              Get a Sneak Peek at Upcoming Blockbusters
-            </p>
+    <>
+      <section className="w-full py-12 md:py-24 lg:py-32">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold tracking-tighter sm:text-4xl">Coming Soon</h2>
+              <p className="max-w-[900px] text-gray-800 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                Get a Sneak Peek at Upcoming Blockbusters
+              </p>
+            </div>
           </div>
-        </div>
 
-        {
-          movies.length > 0 ?
+          {loading && <CarouselSkeleton />}
+          {
+            !loading && movies.length > 0 &&
             <Carousel className="w-full my-4">
-              <CarouselContent className="-ml-1">
+              <CarouselContent className="-ml-1 md:-ml-4">
                 {movies.map((movie, index) =>
-                  <CarouselItem key={index} className="pl-1 basis-1/1 md:basis-1/2 lg:basis-1/4 rounded-xl ">
-                    <MovieCard key={movie.id} title={movie} isCarosouel={true} />
+                  <CarouselItem key={index} className="pl-1 basis-1/1 md:basis-1/2 lg:basis-1/3 rounded-xl ">
+                    <MovieCard key={movie.id} title={movie} isCarosouel={true} isVertical={false} />
                   </CarouselItem>
                 )}
               </CarouselContent>
               <CarouselPrevious />
               <CarouselNext />
-            </Carousel> :
-            <p className="my-4 text-center">No upcoming movies. Stay Tuned</p>
-        }
+            </Carousel>
+          }
 
-      </div>
-    </section>
+          {!loading && movies.length === 0 && <p className="my-4 text-center">No upcoming movies. Stay Tuned</p>}
+
+        </div>
+      </section>
+    </>
   )
 }
 

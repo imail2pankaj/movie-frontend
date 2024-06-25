@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <header className="container px-4 lg:px-6 py-4 flex items-center">
       <Link href="/" className="flex items-center justify-center" prefetch={false}>
-        <Image src={`/icons/logo.png`} height={60} width={60} alt="Movie Database Logo" />
+        <Image src={`/icons/logo-white.png`} height={60} width={60} alt="Movie Database Logo" />
         <span className="sr-only">Movie Database</span>
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6">

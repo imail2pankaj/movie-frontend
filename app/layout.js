@@ -37,7 +37,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning>
       {process.env.NODE_ENV === 'production' && <head>
         <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" />
         <meta name="google-adsense-account" content="ca-pub-6282693958918202" />
