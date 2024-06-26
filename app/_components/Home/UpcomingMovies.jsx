@@ -40,9 +40,9 @@ const UpcomingMovies = () => {
           {
             !loading && movies.length > 0 &&
             <Carousel className="w-full my-4">
-              <CarouselContent className="-ml-1 md:-ml-4">
+              <CarouselContent className="-ml-2 md:-ml-4">
                 {movies.map((movie, index) =>
-                  <CarouselItem key={index} className="pl-1 basis-1/1 md:basis-1/2 lg:basis-1/3 rounded-xl ">
+                  <CarouselItem key={index} className="pl-2 basis-1/1 md:basis-1/2 lg:basis-1/3 rounded-xl ">
                     <MovieCard key={movie.id} title={movie} isCarosouel={true} isVertical={false} />
                   </CarouselItem>
                 )}

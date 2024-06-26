@@ -19,7 +19,7 @@ const SearchSection = () => {
           </div>
           <div className="w-full max-w-3xl">
             <form className="flex space-x-2" action='/movies'>
-              <Input type="search" placeholder="Search movies..." name="q" className="flex-1 bg-white" />
+              <Input type="search" placeholder="Search movies..." name="q" className="flex-1 bg-white placeholder:text-black" />
               <Button type="submit">Search</Button>
             </form>
             {/* <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 mt-4 justify-center">

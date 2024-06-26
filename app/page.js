@@ -10,11 +10,11 @@ import UpcomingMovies from "./_components/Home/UpcomingMovies";
 // import AdBanner from "@/components/AdSense/AdBanner";
 
 export const metadata = {
-  title: "MovieMania: Your Ultimate Movie Database",
-  description: "Discover MovieMania, your go-to platform for comprehensive movie information. Explore detailed insights on your favorite films including genres, directors, cast, ratings, and more. Stay updated with the latest releases and timeless classics.",
+  title: "MMM : Movie Magic Mania | Your Ultimate Movie Database",
+  description: "Discover MMM : Movie Magic Mania, your go-to platform for comprehensive movie information. Explore detailed insights on your favorite films including genres, directors, cast, ratings, and more. Stay updated with the latest releases and timeless classics.",
   openGraph: {
-    title: "MovieMania: Your Ultimate Movie Database",
-    description: "Discover MovieMania, your go-to platform for comprehensive movie information. Explore detailed insights on your favorite films including genres, directors, cast, ratings, and more. Stay updated with the latest releases and timeless classics.",
+    title: "MMM : Movie Magic Mania | Your Ultimate Movie Database",
+    description: "Discover MMM : Movie Magic Mania, your go-to platform for comprehensive movie information. Explore detailed insights on your favorite films including genres, directors, cast, ratings, and more. Stay updated with the latest releases and timeless classics.",
   },
 };
 

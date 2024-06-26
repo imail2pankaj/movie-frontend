@@ -4,6 +4,7 @@ import PersonCard from '@/components/PersonCard';
 import FilterBar from './_component/FilterBar';
 import { getPersonTypes } from '@/actions/common.action';
 import LoadMore from './_component/LoadMore';
+import { setPersonSortingOption } from '@/lib/functions';
 
 const Peoples = async ({ searchParams }) => {
 
@@ -11,8 +12,9 @@ const Peoples = async ({ searchParams }) => {
   const born = searchParams?.born || '';
   const died = searchParams?.died || '';
   const typeIds = searchParams?.type ? searchParams.type.split(',').map(Number) : [];
+  const { column, sort } = searchParams?.sort ? setPersonSortingOption(searchParams.sort) : setPersonSortingOption("");
 
-  const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds, born, died, currentPage: 1 });
+  const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds, column, sort, born, died, currentPage: 1 });
 
   const types = await getPersonTypes({});
 

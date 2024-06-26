@@ -168,7 +168,7 @@ export async function getPersons() {
   });
 }
 
-export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'created_at', sort = 'desc', person_type_id, born, died = "", pageSize = 12 }) {
+export async function fetchFilteredPersons({ query = "", currentPage = 1, column = 'full_name', sort = 'asc', person_type_id, born, died = "", pageSize = 12 }) {
 
   return await prisma.persons.findMany({
     select: {

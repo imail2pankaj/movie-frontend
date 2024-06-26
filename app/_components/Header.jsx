@@ -9,12 +9,12 @@ const Header = () => {
         <span className="sr-only">Movie Database</span>
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6">
-        {/* <Link href="/movies" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
-          Movies
-        </Link> */}
         <Link href="/movies" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
           Movies
         </Link>
+        {/* <Link href="/popular/director" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          Popular Directors
+        </Link> */}
         <Link href="/peoples" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
           Peoples
         </Link>
