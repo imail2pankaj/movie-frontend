@@ -134,6 +134,9 @@ export async function getRecordBySlug(slug) {
       }
     },
   })
+// console.log(record)
+
+const casts = record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Stars' || per.as_role === 'Cast');
 
   return {
     ...record,
@@ -143,6 +146,16 @@ export async function getRecordBySlug(slug) {
       value: Number(genres.id),
     })),
     persons_in_person_type_in_titles: [],
+    casts: casts.sort((a, b) => a.credit - b.credit).map(per => (
+      {
+        value: Number(per.persons.id),
+        label: per.persons.full_name,
+        image: per.persons.image,
+        slug: per.persons.slug,
+        as_role: per.as_role,
+        title: per.title,
+      }
+    )),
     writer_id: (
       record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Writer')
     ).map(per => (

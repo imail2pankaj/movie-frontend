@@ -110,6 +110,7 @@ const MovieDetails = async ({ params: { slug } }) => {
           <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-8">
             {record.director_id.map((person) => <CastCrewCard person={person} key={person.id} />)}
             {record.writer_id.map((person) => <CastCrewCard person={person} key={person.id} />)}
+            {record.casts.map((person) => <CastCrewCard person={person} key={person.id} />)}
           </div>
         </div>
       </section>
@@ -118,14 +119,14 @@ const MovieDetails = async ({ params: { slug } }) => {
 }
 const CastCrewCard = ({ person }) =>
   <Card>
-    <CardHeader className="text-center">
+    <CardHeader className="text-center p-2">
       <CardTitle>
         <Link target='_blnk' href={person.slug} className='flex flex-col text-center gap-2'>
           <Image src={getImageURL("persons", person.image)} height={120} width={120} alt={person.full_name} className='rounded-full aspect-[1/1] object-cover' />
           <p className='text-sm md:text-md'>{person.label}</p>
         </Link>
       </CardTitle>
-      <CardDescription className='text-xs md:text-sm'>{person.as_role}</CardDescription>
+      <CardDescription className='text-xs md:text-sm'>{person.title ? person.title : person.as_role}</CardDescription>
     </CardHeader>
   </Card>
 
