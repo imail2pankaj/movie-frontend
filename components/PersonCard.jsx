@@ -11,7 +11,7 @@ const variants = {
 
 const PersonCard = ({ person, index = 1 }) => {
   return (
-    <Link href={`/peoples/${person.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
+    <Link area-label={`${person.full_name} age, ${person.full_name} movies, ${person.full_name} height, `} href={`/peoples/${person.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
       <MotionDiv
         variants={variants}
         initial="hidden"

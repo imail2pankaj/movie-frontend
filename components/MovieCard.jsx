@@ -11,8 +11,9 @@ const variants = {
 
 const MovieCard = ({ title, index = 1, isCarosouel = false, isVertical = true }) => {
 
+  const title = title.genres_in_titles ? title.genres_in_titles.map(type => `Popular ${type.genres.title} ${title.title} Movie`) : title.title;
   return (
-    <Link href={`/movies/${title.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
+    <Link aria-label={title} href={`/movies/${title.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
       <MotionDiv
         variants={variants}
         initial="hidden"
@@ -28,7 +29,7 @@ const MovieCard = ({ title, index = 1, isCarosouel = false, isVertical = true })
           src={getImageURL("titles", title.image)}
           width={500}
           height={450}
-          alt={title.genres_in_titles ? title.genres_in_titles.map(type => `Popular ${type.genres.title} ${title.title} Movie`) : title.title}
+          alt={title}
           loading='lazy'
           priority={false}
           className={`h-[300px] object-cover ${!isCarosouel && "group-hover:scale-105 transition-transform duration-300"}`}

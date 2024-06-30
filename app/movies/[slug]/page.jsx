@@ -121,8 +121,18 @@ const CastCrewCard = ({ person }) =>
   <Card>
     <CardHeader className="text-center p-2">
       <CardTitle>
-        <Link target='_blnk' href={person.slug} className='flex flex-col text-center gap-2'>
-          <Image src={getImageURL("persons", person.image)} height={120} width={120} alt={person.full_name} className='rounded-full aspect-[1/1] object-cover' />
+        <Link
+          aria-label={`${person.full_name} movies, ${person.full_name} songs, ${person.full_name} shows `}
+          href={`/peoples/${person.slug}`}
+          className='flex flex-col text-center gap-2'
+        >
+          <Image
+            src={getImageURL("persons", person.image)}
+            height={120}
+            width={120}
+            alt={`${person.full_name} movies, ${person.full_name} songs, ${person.full_name} shows `}
+            className='rounded-full aspect-[1/1] object-cover'
+          />
           <p className='text-sm md:text-md'>{person.label}</p>
         </Link>
       </CardTitle>
