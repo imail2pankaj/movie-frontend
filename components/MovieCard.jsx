@@ -30,6 +30,7 @@ const MovieCard = ({ title, index = 1, isCarosouel = false, isVertical = true })
           height={450}
           alt={title.genres_in_titles ? title.genres_in_titles.map(type => `Popular ${type.genres.title} ${title.title} Movie`) : title.title}
           loading='lazy'
+          priority={false}
           className={`h-[300px] object-cover ${!isCarosouel && "group-hover:scale-105 transition-transform duration-300"}`}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/100 to-transparent group-hover:from-gray-900/60 transition-colors duration-300" />
