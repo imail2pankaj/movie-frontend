@@ -96,6 +96,7 @@ export async function getPopularMovies() {
       },
     },
     where: { status: "Publish" },
+    orderBy: { ['release_date']: 'desc' },
     take: 4
   });
 }
