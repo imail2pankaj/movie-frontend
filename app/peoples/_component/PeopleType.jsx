@@ -51,7 +51,7 @@ export default function PeopleType({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="outline" size="sm" className="h-8 border-dashed">
+        <Button variant="outline" size="sm" className="h-9 border">
           <PlusCircle className="mr-2 h-4 w-4" />
           {title}
           {selectedValues?.length > 0 && (
