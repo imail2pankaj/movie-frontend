@@ -11,7 +11,7 @@ const variants = {
 
 const PersonCard = ({ person, index = 1 }) => {
   return (
-    <Link href={`/peoples/${person.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
+    <Link area-label={`${person.full_name} age, ${person.full_name} movies, ${person.full_name} height, `} href={`/peoples/${person.slug}`} className="group relative rounded-xl overflow-hidden" prefetch={false}>
       <MotionDiv
         variants={variants}
         initial="hidden"
@@ -29,6 +29,7 @@ const PersonCard = ({ person, index = 1 }) => {
           height={450}
           alt={person.person_types_in_persons ? person.person_types_in_persons.map(type => `Popular ${type.person_types.title} ${person.full_name}`) : person.full_name}
           loading='lazy'
+          priority={false}
           className="aspect-[3/4] md:aspect-[2/3] object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/100 to-transparent group-hover:from-gray-900/60 transition-colors duration-300" />

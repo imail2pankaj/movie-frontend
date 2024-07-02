@@ -12,7 +12,6 @@ const UpcomingMovies = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
 
     const loadingUpcomingMovies = async () => {

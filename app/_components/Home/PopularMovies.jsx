@@ -1,7 +1,22 @@
+"use client"
+import { getPopularMovies } from '@/actions/common.action';
 import MovieCard from '@/components/MovieCard'
-import PersonCard from '@/components/PersonCard'
+import { Skeleton } from '@/components/ui/skeleton';
+import { useEffect, useState } from 'react'
 
-const PopularMovies = ({ movies }) => {
+const PopularMovies = () => {
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+    const loadPopularPersons = async () => {
+      setMovies(await getPopularMovies());
+      setLoading(false)
+    }
+
+    loadPopularPersons();
+  }, [])
   return (
     <section className="w-full py-12 md:py-24 lg:py-32">
       <div className="container px-4 md:px-6">
@@ -14,8 +29,19 @@ const PopularMovies = ({ movies }) => {
           </div>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-          {movies.map((movie) => <MovieCard key={movie.id} title={movie} />)}
+          {
+            loading && 
+            <>
+            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
+            </>
+          }
+
+          {!loading && movies.length > 0 && movies.map((movie) => <MovieCard key={movie.id} title={movie} />)}
         </div>
+        {!loading && movies.length === 0 && <p className="my-4 text-center">No upcoming movies. Stay Tuned</p>}
       </div>
     </section>
   )

@@ -92,7 +92,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
             <Card>
               <CardHeader>
                 <CardTitle>Born</CardTitle>
-                <CardDescription><Link href={`/peoples?born=${queryParseDate(person.born)}`}>{parseDate(person.born)}</Link> | {person.birth_place}</CardDescription>
+                <CardDescription><Link aria-label={`${person.full_name} age, ${person.full_name} birth place`} href={`/peoples?born=${queryParseDate(person.born)}`}>{parseDate(person.born)}</Link> | {person.birth_place}</CardDescription>
               </CardHeader>
             </Card>
             {person.birth_name?.trim() && <Card>
@@ -123,7 +123,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
             {person.person_links.map((link) => (
               <Card key={link.id}>
                 <CardHeader>
-                  <CardTitle><Link target='_blnk' href={link.link}>{link.title}</Link></CardTitle>
+                  <CardTitle><Link aria-label={`${person.full_name} social media, ${person.full_name} ${link.title}`} target='_blnk' href={link.link}>{link.title}</Link></CardTitle>
                 </CardHeader>
               </Card>
             ))}

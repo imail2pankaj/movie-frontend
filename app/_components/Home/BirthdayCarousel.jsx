@@ -20,6 +20,7 @@ const BirthdayCarousel = ({ bdays }) => {
                       height={200}
                       alt={_.full_name}
                       loading='lazy'
+                      priority={false}
                       className="aspect-[1/1] md:aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300 rounded-sm"
                     />
                   </Link>

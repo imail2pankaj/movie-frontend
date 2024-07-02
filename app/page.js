@@ -22,15 +22,13 @@ export default async function Home() {
 
   const persons = await getPopularPersons(["Actress", "Actor"]);
 
-  const movies = await getPopularMovies();
-
   return (
     <div>
       {/* <HeroSection /> */}
       <Browse />
       <SearchSection />
-      <UpcomingMovies movies={movies.length ? movies : []} />
-      <PopularMovies movies={movies.length ? movies : []} />
+      <UpcomingMovies />
+      <PopularMovies />
       <PopularPersons persons={persons.length ? persons : []} />
       <Birthdays />
       {/* <div className="container"><AdBanner dataAdSlot="6944255980" dataAdFormat="auto" dataFullWidthResponsive={true} pId="ca-pub-6282693958918202" /></div> */}
