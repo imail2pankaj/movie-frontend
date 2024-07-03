@@ -3,14 +3,13 @@ import PersonJSONLD from '@/components/PersonJSONLD';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
 import { getImageURL } from '@/lib/functions';
 import { parseDate, queryParseDate } from '@/lib/utils';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -123,7 +122,17 @@ const PersonalDetail = async ({ params: { slug } }) => {
             {person.person_links.map((link) => (
               <Card key={link.id}>
                 <CardHeader>
-                  <CardTitle><Link aria-label={`${person.full_name} social media, ${person.full_name} ${link.title}`} target='_blnk' href={link.link}>{link.title}</Link></CardTitle>
+                  <CardTitle>
+                    <Link
+                      aria-label={`${person.full_name} social media, ${person.full_name} ${link.title}`}
+                      className='flex justify-between items-center'
+                      target='_blank'
+                      href={link.link}
+                      rel='noreferrer'
+                    >
+                      {link.title} <ExternalLink />
+                    </Link>
+                  </CardTitle>
                 </CardHeader>
               </Card>
             ))}

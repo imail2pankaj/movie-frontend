@@ -1,5 +1,6 @@
 "use server"
 
+import { getImageURL } from "@/lib/functions";
 import prisma from "@/lib/prisma";
 
 export const getPopularPersons = async (personTypes) => {
@@ -118,4 +119,51 @@ export async function getUpcomingMovies(date) {
     },
     take: 10
   });
+}
+
+
+export async function getNavbarSearch(data) {
+
+  const persons = await prisma.persons.findMany({
+    select: {
+      full_name: true,
+      slug: true,
+      image: true,
+    },
+    where: {
+      status: "Publish",
+      full_name: { contains: data },
+    },
+    take: 5,
+    orderBy: { ['id']: 'desc' },
+  });
+
+  const titles = await prisma.titles.findMany({
+    select: {
+      title: true,
+      slug: true,
+      image: true,
+    },
+    where: {
+      status: "Publish",
+      title: { contains: data },
+    },
+    take: 5
+  });
+  return [
+    ...persons.map(p => (
+      {
+        name: p.full_name,
+        slug: `/peoples/${p.slug}`,
+        image: getImageURL("persons", p.image)
+      }
+    )),
+    ...titles.map(p => (
+      {
+        name: p.title,
+        slug: `/movies/${p.slug}`,
+        image: getImageURL("titles", p.image)
+      }
+    ))
+  ]
 }
