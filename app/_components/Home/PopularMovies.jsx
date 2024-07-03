@@ -32,10 +32,10 @@ const PopularMovies = () => {
           {
             loading && 
             <>
-            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
-            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
-            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
-            <Skeleton className="h-[300px] w-[300px] md:w-full rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-full sm:w-[300px] rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-full sm:w-[300px] rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-full sm:w-[300px] rounded-xl border-white" />
+            <Skeleton className="h-[300px] w-full sm:w-[300px] rounded-xl border-white" />
             </>
           }
 
