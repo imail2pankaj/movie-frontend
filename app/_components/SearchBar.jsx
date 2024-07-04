@@ -36,7 +36,7 @@ const SearchBar = () => {
 
   return (
     <form className="relative flex-1 max-w-md">
-      <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+      <SearchIcon className="absolute z-[99] left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
       <div className='relative'>
         <Input
           type="search"
@@ -50,7 +50,7 @@ const SearchBar = () => {
       </div>
       {q.length > 0 && <ul className='w-full bg-black absolute top-10 left-0 border-1 border-white'>
         {records.map(record => (
-          <li key={record.slug} className='p-2'>
+          <li key={record.slug} className='p-2 pointer-cursor'>
             <div onClick={() => redirectUrl(record.slug)} className=' flex items-center gap-2'>
               <Image
                 src={record.image}
