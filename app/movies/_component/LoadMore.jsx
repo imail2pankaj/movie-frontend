@@ -5,7 +5,7 @@ import { Loader, Loader2 } from 'lucide-react';
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer';
 
-const LoadMore = ({ q,released_year, genreIds }) => {
+const LoadMore = ({ q,released_year, genreIds, column, sort }) => {
   const [records, setRecords] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(2);
@@ -20,7 +20,7 @@ const LoadMore = ({ q,released_year, genreIds }) => {
       // const genreIds = searchParams?.type ? searchParams.type.split(',').map(Number) : [];
 
       setLoading(true)
-      const data = await fetchFilteredRecordsPagination({ query: q, genres: genreIds, released_year, currentPage: page });
+      const data = await fetchFilteredRecordsPagination({ query: q, genres: genreIds, released_year, currentPage: page, column, sort });
       setLoading(false)
 
       setHasLoadMore(data.records.length >= 12)

@@ -4,14 +4,16 @@ import { getGenres } from '@/actions/common.action';
 import LoadMore from './_component/LoadMore';
 import MovieCard from '@/components/MovieCard';
 import { fetchFilteredRecordsPagination } from '@/actions/titles.action';
+import { setTitleSortingOption } from '@/lib/functions';
 
 const Movies = async ({ searchParams }) => {
 
   const q = searchParams?.q || '';
   const released_year = searchParams?.released_year || '';
   const genreIds = searchParams?.genres ? searchParams.genres.split(',').map(Number) : [];
+  const { column, sort } = searchParams?.sort ? setTitleSortingOption(searchParams.sort) : setTitleSortingOption("");
 
-  const { records } = await fetchFilteredRecordsPagination({ query: q, genre_id: genreIds, released_year, currentPage: 1 });
+  const { records } = await fetchFilteredRecordsPagination({ query: q, genre_id: genreIds, released_year, currentPage: 1, column, sort });
 
   const genres = await getGenres({});
 
@@ -37,7 +39,7 @@ const Movies = async ({ searchParams }) => {
             })}
           </div>
         </div>
-        <LoadMore key={q + released_year + genreIds.join()} q={q} released_year={released_year} genreIds={genreIds} />
+        <LoadMore key={q + released_year + column + sort + genreIds.join()} q={q} released_year={released_year} genreIds={genreIds} column={column} sort={sort} />
       </section>
     </>
   );
