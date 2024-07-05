@@ -64,7 +64,6 @@ const FilterBar = ({ genres }) => {
               <SelectValue placeholder={'Select Sorting: Z-A'} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem key={'---'} value={'all'}>{'All'}</SelectItem>
               {titleSortingOptions.map(option => <SelectItem key={option.slug} value={option.slug}>{option.name}</SelectItem>)}
             </SelectContent>
           </Select>

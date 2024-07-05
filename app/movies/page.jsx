@@ -11,7 +11,7 @@ const Movies = async ({ searchParams }) => {
   const q = searchParams?.q || '';
   const released_year = searchParams?.released_year || '';
   const genreIds = searchParams?.genres ? searchParams.genres.split(',').map(Number) : [];
-  const { column, sort } = searchParams?.sort ? setTitleSortingOption(searchParams.sort) : setTitleSortingOption("");
+  const { column, sort } = searchParams?.sort ? setTitleSortingOption(searchParams.sort) : setTitleSortingOption("a-z");
 
   const { records } = await fetchFilteredRecordsPagination({ query: q, genre_id: genreIds, released_year, currentPage: 1, column, sort });
 

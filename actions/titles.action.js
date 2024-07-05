@@ -51,7 +51,7 @@ export async function getRecords() {
   });
 }
 
-export async function fetchFilteredRecords({ query, type, released_year, currentPage, column, sort, genre_id, page_size = 10 }) {
+export async function fetchFilteredRecords({ query, type, released_year, currentPage, column, sort, genre_id, page_size = 12 }) {
 
   return await prisma.titles.findMany({
     select: {
@@ -82,7 +82,7 @@ export async function fetchFilteredRecordsCount({ query, type, released_year, ge
   });
 }
 
-export async function fetchFilteredRecordsPagination({ query, type, released_year, currentPage, column, sort, genre_id, page_size = 10 }) {
+export async function fetchFilteredRecordsPagination({ query, type, released_year, currentPage, column, sort, genre_id, page_size = 12 }) {
   return {
     records: await fetchFilteredRecords({ query, currentPage, type, released_year, column, sort, genre_id, page_size }),
     totalRecords: await fetchFilteredRecordsCount({ query, type, released_year, genre_id })
