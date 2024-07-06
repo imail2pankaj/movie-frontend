@@ -32,9 +32,9 @@ const buildQuery = ({ query, type, release_year, genre_id }) => {
     where["year"] = release_year;
   }
 
-  // if (genre_id.length) {
-  //   where["genres_in_titles"] = { some: { genre_id: genre_id } };
-  // }
+  if (genre_id.length) {
+    where["genres_in_titles"] = { some: { genre_id: { in: genre_id } } };
+  }
 
   return where;
 }
@@ -134,9 +134,9 @@ export async function getRecordBySlug(slug) {
       }
     },
   })
-// console.log(record)
+  // console.log(record)
 
-const casts = record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Stars' || per.as_role === 'Cast');
+  const casts = record.persons_in_person_type_in_titles.filter(per => per.as_role === 'Stars' || per.as_role === 'Cast');
 
   return {
     ...record,
