@@ -22,7 +22,7 @@ export async function generateMetadata({ params }, parent) {
 
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
-  const title = person.person_type_id.map(x => `Popular ${x.label} ${person.full_name}, Best ${x.label} ${person.full_name}`)
+  const title = person.person_type_id.map(x => `Popular ${x.label} ${person.full_name}`)
   return {
     title: title.join(" | "),
     openGraph: {
