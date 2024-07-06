@@ -42,9 +42,9 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="sKCF8N5RL_s-B01eLKxvcM-rWyjyDEQ8-yPNqQ8dIWU" />
         <meta name="google-adsense-account" content="ca-pub-6282693958918202" />
         <meta name="yandex-verification" content="7cf59f716d6ee84b" />
-        <Script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`} crossOrigin="anonymous" strategy="afterInteractive" />
+        <Script id="ga-tag-1" async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_TRACKING_ID}`} crossOrigin="anonymous" strategy="afterInteractive" />
 
-        <Script>
+        <Script id="ga-tag-2">
           {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
