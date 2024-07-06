@@ -32,7 +32,7 @@ const buildQuery = ({ query, type, release_year, genre_id }) => {
     where["year"] = release_year;
   }
 
-  if (genre_id.length) {
+  if (genre_id && genre_id.length) {
     where["genres_in_titles"] = { some: { genre_id: { in: genre_id } } };
   }
 
