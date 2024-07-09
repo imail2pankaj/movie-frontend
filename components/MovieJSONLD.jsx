@@ -1,7 +1,7 @@
 import { BASE_URL } from '@/lib/constants'
 import { getImageURL } from '@/lib/functions'
 
-const MovieJSONLD = ({record}) => {
+const MovieJSONLD = ({ record }) => {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Movie',
@@ -18,6 +18,10 @@ const MovieJSONLD = ({record}) => {
       "@type": "Person",
       name: (record.director_id.map(x => x.label)).join()
     },
+    actor: record.casts.map(x => ({
+      "@type": "Person",
+      "name": x.label
+    }))
   }
   return (
     <script

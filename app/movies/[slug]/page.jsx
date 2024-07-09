@@ -25,7 +25,7 @@ export async function generateMetadata({ params }, parent) {
   // optionally access and extend (rather than replace) parent metadata
   const previousImages = (await parent).openGraph?.images || []
 
-  const title = record.genre_id.map(x => `Popular ${x.label} ${record.type} ${record.title}, Best ${x.label} ${record.type} ${record.title}`).join(" | ");
+  const title = record.genre_id.map(x => `Popular ${x.label} ${record.type} ${record.title}`).join(" | ");
 
   return {
     title: title,
@@ -40,7 +40,7 @@ export async function generateMetadata({ params }, parent) {
 const MovieDetails = async ({ params: { slug } }) => {
 
   const record = await getRecordBySlug(slug);
-  // console.log(record)
+
   return (
     <>
       <MovieJSONLD record={record} />
