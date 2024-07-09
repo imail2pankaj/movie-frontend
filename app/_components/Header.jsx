@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="container flex items-center justify-between h-18 px-4 bg-background border-b md:px-6 py-2">
       <div className="flex items-center gap-4">
-        <Link href="#" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
+        <Link href="/" className="flex items-center gap-2 text-lg font-semibold" prefetch={false}>
           <Image src={'/icons/logo-white.png'} className='h-6 w-6 md:h-12 md:w-12'  height={60} width={60} alt="Movie Database Logo" />
         </Link>
         <SearchBar />
@@ -19,10 +19,10 @@ const Header = () => {
         <Link href="/" className="px-2 py-1 rounded-md hover:text-accent-foreground" prefetch={false}>
           Home
         </Link>
-        <Link href="/movies" className="px-2 py-1 rounded-md hover:text-accent-foreground" prefetch={false}>
+        <Link href="/movies" className="px-2 py-1 rounded-md hover:text-accent-foreground">
           Movies
         </Link>
-        <Link href="/peoples" className="px-2 py-1 rounded-md hover:text-accent-foreground" prefetch={false}>
+        <Link href="/peoples" className="px-2 py-1 rounded-md hover:text-accent-foreground">
           Peoples
         </Link>
       </nav>
@@ -45,14 +45,14 @@ const Header = () => {
             <Link
               href="/movies"
               className="px-2 py-1 rounded-md hover:bg-accent hover:text-accent-foreground"
-              prefetch={false}
+              // prefetch={false}
             >
-              About
+              Movies
             </Link>
             <Link
               href="/peoples"
               className="px-2 py-1 rounded-md hover:bg-accent hover:text-accent-foreground"
-              prefetch={false}
+              // prefetch={false}
             >
               Peoples
             </Link>

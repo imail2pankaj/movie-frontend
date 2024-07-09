@@ -12,6 +12,8 @@ import { parseDate, queryParseDate } from '@/lib/utils';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import PeopleAndPeopleTypeMovies from '../_component/PeopleAndPeopleTypeMovies';
+import { Accordion } from '@/components/ui/accordion';
 
 export async function generateMetadata({ params }, parent) {
 
@@ -42,7 +44,7 @@ const PersonalDetail = async ({ params: { slug } }) => {
       <PersonJSONLD record={person} />
       <section className="bg-gray-900 text-white py-6 md:py-8 lg:py-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6  break-all">
             <div className="w-48 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 rounded-full overflow-hidden border-4 border-gray-800 dark:border-gray-700">
               <Image
                 src={getImageURL("persons", person.image)}
@@ -80,8 +82,9 @@ const PersonalDetail = async ({ params: { slug } }) => {
       </section>
       <section className="pb-6 md:pb-8 lg:pb-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-8">Personal Information</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold">Personal Information</h3>
+          <p className="mb-8 text-gray-500 dark:text-gray-400">{person.full_name}&apos;s Height, {person.full_name}&apos;s Age, {person.full_name}&apos;s Other names, {person.full_name}&apos;s Birthday </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {person.nick_names?.trim() && <Card>
               <CardHeader>
                 <CardTitle>Other Names</CardTitle>
@@ -117,8 +120,9 @@ const PersonalDetail = async ({ params: { slug } }) => {
       </section>
       {person.person_links.length > 0 && <section className="pb-6 md:pb-8 lg:pb-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-8">External Links</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-bold">External Links</h3>
+          <p className="mb-8 text-gray-500 dark:text-gray-400">All social media links and External links for {person.full_name} </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {person.person_links.map((link) => (
               <Card key={link.id}>
                 <CardHeader>
@@ -139,8 +143,22 @@ const PersonalDetail = async ({ params: { slug } }) => {
           </div>
         </div>
       </section>}
+      <section className="py-6 md:py-8 lg:py-10">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-8">{person.full_name} Movies/Shows</h2>
+          <div className="grid grid-cols-1 gap-8">
+            {person.person_type_id.map(x =>
+              <Accordion type="single" collapsible className="w-full" key={x.value}>
+                <PeopleAndPeopleTypeMovies personType={x} personId={Number(person.id)} fullName={person.full_name} />
+              </Accordion>
+            )}
+          </div>
+        </div>
+      </section>
+
     </>
   )
 }
+
 
 export default PersonalDetail

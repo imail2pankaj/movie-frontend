@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { getImageURL } from "@/lib/functions"
+import { calculateAge, getImageURL } from "@/lib/functions"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -42,15 +42,6 @@ const BirthdayCarousel = ({ bdays }) => {
       <CarouselNext />
     </Carousel>
   )
-}
-
-function calculateAge(birthdate) {
-  const today = new Date();
-  const age = today.getFullYear() - birthdate.getFullYear() - (
-    today.getMonth() < birthdate.getMonth() ||
-    (today.getMonth() === birthdate.getMonth() && today.getDate() < birthdate.getDate())
-  );
-  return age;
 }
 
 export default BirthdayCarousel

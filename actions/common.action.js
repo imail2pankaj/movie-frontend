@@ -52,10 +52,26 @@ export async function getPersonBySlug(slug) {
     include: {
       person_types_in_persons: {
         include: {
-          person_types: true
+          person_types: {
+            include: {}
+          }
         }
       },
-      person_links: true
+      person_links: true,
+      // persons_in_person_type_in_titles: {
+      //   include: {
+      //     titles: {
+      //       select: {
+      //         id:true,
+      //         title:true,
+      //         slug:true,
+      //         image:true,
+      //         details:true,
+      //         year:true,
+      //       }
+      //     }
+      //   }
+      // }
     },
   })
 
@@ -167,4 +183,33 @@ export async function getNavbarSearch(data) {
       }
     ))
   ]
+}
+
+
+export async function getPersonsInPersonTypeInTitles(person_type_id, person_id) {
+
+  const movies = await prisma.persons_in_person_type_in_titles.findMany({
+    where: { person_type_id, person_id },
+    include: {
+      titles: {
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          image: true,
+          details: true,
+          year: true,
+        }
+      }
+    },
+    orderBy: [
+      {
+        titles: {
+          release_date: 'desc'
+        },
+      }
+    ]
+  })
+
+  return movies;
 }
