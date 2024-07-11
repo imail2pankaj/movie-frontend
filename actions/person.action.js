@@ -244,6 +244,7 @@ export async function fetchSitemapPersons() {
     select: {
       id: true,
       slug: true,
+      full_name: true,
       created_at: true,
     },
     where: { status: "Publish" },

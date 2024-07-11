@@ -20,6 +20,9 @@ const Footer = () => {
           <Link href="/peoples" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Peoples
           </Link>
+          <Link href="/sitemap" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Sitemap
+          </Link>
           <Link href="/privacy-policy" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Privacy Policy
           </Link>

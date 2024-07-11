@@ -189,6 +189,7 @@ export async function fetchSitemapMovies() {
     select: {
       id: true,
       slug: true,
+      title: true,
       created_at: true,
     },
     where: { status: "Publish" },
