@@ -1,22 +1,22 @@
 
 import { fetchFilteredPersonsPagination } from '@/actions/person.action';
 import PersonCard from '@/components/PersonCard';
-import FilterBar from './_component/FilterBar';
+import FilterBar from '../_component/FilterBar';
 import { getPersonTypes } from '@/actions/common.action';
-import LoadMore from './_component/LoadMore';
+import LoadMore from '../_component/LoadMore';
 import { setPersonSortingOption } from '@/lib/functions';
 
 export const metadata = {
-  title: "Popular Actors | Best Actors | Best Actress",
-  description: "Popular Actors | Best Actors | Best Actress",
+  title: "Popular Directors | Best Directors | MMM : Movie - Magic - Mania",
+  description: "Popular Directors | Best Directors | MMM : Movie - Magic - Mania",
 };
 
-const Peoples = async ({ searchParams }) => {
+const Directors = async ({ searchParams }) => {
 
   const q = searchParams?.q || '';
   const born = searchParams?.born || '';
   const died = searchParams?.died || '';
-  const typeIds = searchParams?.type ? searchParams.type.split(',').map(Number) : [];
+  const typeIds = searchParams?.type ? searchParams.type.split(',').map(Number) : [10];
   const { column, sort } = searchParams?.sort ? setPersonSortingOption(searchParams.sort) : setPersonSortingOption("");
 
   const { persons } = await fetchFilteredPersonsPagination({ query: q, person_type_id: typeIds, column, sort, born, died, currentPage: 1 });
@@ -27,10 +27,10 @@ const Peoples = async ({ searchParams }) => {
     <>
       <section className="py-3 md:py-4 lg:py-8">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
-          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">Peoples</h1>
+          <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold">Directors</h1>
         </div>
       </section>
-      <FilterBar types={types} />
+      <FilterBar types={types} showTypeFilter={false} queryTextPlaceholder="Search Directors..." />
       <section className="py-3 md:py-4 lg:py-5">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
@@ -51,4 +51,4 @@ const Peoples = async ({ searchParams }) => {
   );
 };
 
-export default Peoples;
+export default Directors;

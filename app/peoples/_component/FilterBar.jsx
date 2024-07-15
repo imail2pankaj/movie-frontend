@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { personSortingOptions } from '@/lib/constants';
 
 
-const FilterBar = ({ types }) => {
+const FilterBar = ({ types, showTypeFilter = true, queryTextPlaceholder = 'Search People...' }) => {
 
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams);
@@ -43,14 +43,14 @@ const FilterBar = ({ types }) => {
           <Input
             className={'w-40'}
             id={'q'}
-            placeholder={'Search People...'}
+            placeholder={queryTextPlaceholder}
             type={'search'}
             onChange={(e) => {
               handleSearch(e.target.value);
             }}
             defaultValue={searchParams.get('q')?.toString()}
           />
-          <PeopleType types={types.map(x => ({ id: x.id, label: x.title }))} />
+          {showTypeFilter && <PeopleType types={types.map(x => ({ id: x.id, label: x.title }))} />}
         </div>
         <div className='flex items-center justify-between gap-2'>
           <Select onValueChange={(e) => handleSorting(e)}>

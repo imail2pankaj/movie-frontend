@@ -22,6 +22,9 @@ const Header = () => {
         <Link href="/movies" className="px-2 py-1 rounded-md hover:text-accent-foreground">
           Movies
         </Link>
+        <Link href="/peoples/directors" className="px-2 py-1 rounded-md hover:text-accent-foreground">
+          Directors
+        </Link>
         <Link href="/peoples" className="px-2 py-1 rounded-md hover:text-accent-foreground">
           Peoples
         </Link>
@@ -48,6 +51,13 @@ const Header = () => {
               // prefetch={false}
             >
               Movies
+            </Link>
+            <Link
+              href="/peoples/directors"
+              className="px-2 py-1 rounded-md hover:bg-accent hover:text-accent-foreground"
+              // prefetch={false}
+            >
+              Directors
             </Link>
             <Link
               href="/peoples"

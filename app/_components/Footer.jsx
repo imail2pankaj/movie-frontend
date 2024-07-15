@@ -17,6 +17,9 @@ const Footer = () => {
           <Link href="/movies" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Movies
           </Link>
+          <Link href="/peoples/directors" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+            Directors
+          </Link>
           <Link href="/peoples" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
             Peoples
           </Link>

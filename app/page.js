@@ -1,13 +1,11 @@
 
-import { getPopularMovies, getPopularPersons } from "@/actions/common.action";
-import HeroSection from "./_components/Home/HeroSection";
+import { getPopularPersons } from "@/actions/common.action";
 import PopularMovies from "./_components/Home/PopularMovies";
 import PopularPersons from "./_components/Home/PopularPersons";
 import Browse from "./_components/Home/Browse";
 import SearchSection from "./_components/Home/SearchSection";
 import Birthdays from "./_components/Home/Birthdays";
 import UpcomingMovies from "./_components/Home/UpcomingMovies";
-// import AdBanner from "@/components/AdSense/AdBanner";
 
 export const metadata = {
   title: "MMM : Movie Magic Mania | Your Ultimate Movie Database",
