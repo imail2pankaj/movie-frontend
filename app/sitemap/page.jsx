@@ -22,6 +22,10 @@ export default async function sitemaps() {
       name: "Movies",
     },
     {
+      url: "/peoples/directors",
+      name: "Popular Directors",
+    },
+    {
       url: "/privacy-policy",
       name: "Privacy Policy",
     },

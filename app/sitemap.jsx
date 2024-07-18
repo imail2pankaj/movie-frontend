@@ -19,6 +19,12 @@ export default async function sitemap() {
       priority: 0.8,
     },
     {
+      url: BASE_URL + "peoples/directors",
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
       url: BASE_URL + "movies",
       lastModified: new Date(),
       changeFrequency: 'monthly',
