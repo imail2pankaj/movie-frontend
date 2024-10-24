@@ -2,6 +2,7 @@
 import { fetchFilteredPersonsPagination } from '@/actions/person.action';
 import { getPersonTypes } from '@/actions/common.action';
 import { setPersonSortingOption } from '@/lib/functions';
+import dynamic from 'next/dynamic';
 
 const PersonCard = dynamic(() => import('@/components/PersonCard'), {
   loading: () => <p>Loading...</p>,

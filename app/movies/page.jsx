@@ -2,6 +2,7 @@
 import { getGenres } from '@/actions/common.action';
 import { fetchFilteredRecordsPagination } from '@/actions/titles.action';
 import { setTitleSortingOption } from '@/lib/functions';
+import dynamic from 'next/dynamic';
 
 const FilterBar = dynamic(() => import('./_component/FilterBar'), {
   loading: () => <p>Loading...</p>,
