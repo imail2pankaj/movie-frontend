@@ -1,10 +1,19 @@
 
-import FilterBar from './_component/FilterBar';
 import { getGenres } from '@/actions/common.action';
-import LoadMore from './_component/LoadMore';
-import MovieCard from '@/components/MovieCard';
 import { fetchFilteredRecordsPagination } from '@/actions/titles.action';
 import { setTitleSortingOption } from '@/lib/functions';
+
+const FilterBar = dynamic(() => import('./_component/FilterBar'), {
+  loading: () => <p>Loading...</p>,
+})
+
+const LoadMore = dynamic(() => import('./_component/LoadMore'), {
+  loading: () => <p>Loading...</p>,
+})
+
+const MovieCard = dynamic(() => import('@/components/MovieCard'), {
+  loading: () => <p>Loading...</p>,
+})
 
 const Movies = async ({ searchParams }) => {
 

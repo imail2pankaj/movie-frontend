@@ -1,10 +1,19 @@
 
 import { fetchFilteredPersonsPagination } from '@/actions/person.action';
-import PersonCard from '@/components/PersonCard';
-import FilterBar from './_component/FilterBar';
 import { getPersonTypes } from '@/actions/common.action';
-import LoadMore from './_component/LoadMore';
 import { setPersonSortingOption } from '@/lib/functions';
+
+const PersonCard = dynamic(() => import('@/components/PersonCard'), {
+  loading: () => <p>Loading...</p>,
+})
+
+const FilterBar = dynamic(() => import('./_component/FilterBar'), {
+  loading: () => <p>Loading...</p>,
+})
+
+const LoadMore = dynamic(() => import('./_component/LoadMore'), {
+  loading: () => <p>Loading...</p>,
+})
 
 export const metadata = {
   title: "Popular Actors | Best Actors | Best Actress",

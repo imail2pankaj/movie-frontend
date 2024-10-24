@@ -1,11 +1,30 @@
+import dynamic from 'next/dynamic'
 
 import { getPopularPersons } from "@/actions/common.action";
-import PopularMovies from "./_components/Home/PopularMovies";
-import PopularPersons from "./_components/Home/PopularPersons";
-import Browse from "./_components/Home/Browse";
-import SearchSection from "./_components/Home/SearchSection";
-import Birthdays from "./_components/Home/Birthdays";
-import UpcomingMovies from "./_components/Home/UpcomingMovies";
+ 
+const PopularMovies = dynamic(() => import('./_components/Home/PopularMovies'), {
+  loading: () => <p>Loading...</p>,
+})
+ 
+const PopularPersons = dynamic(() => import('./_components/Home/PopularPersons'), {
+  loading: () => <p>Loading...</p>,
+})
+ 
+const Browse = dynamic(() => import('./_components/Home/Browse'), {
+  loading: () => <p>Loading...</p>,
+})
+ 
+const SearchSection = dynamic(() => import('./_components/Home/SearchSection'), {
+  loading: () => <p>Loading...</p>,
+})
+ 
+const Birthdays = dynamic(() => import('./_components/Home/Birthdays'), {
+  loading: () => <p>Loading...</p>,
+})
+ 
+const UpcomingMovies = dynamic(() => import('./_components/Home/UpcomingMovies'), {
+  loading: () => <p>Loading...</p>,
+})
 
 export const metadata = {
   title: "MMM : Movie Magic Mania | Your Ultimate Movie Database",

@@ -3,13 +3,10 @@ import MovieJSONLD from '@/components/MovieJSONLD';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { BASE_URL } from '@/lib/constants';
 import { convertRunTime, getImageURL } from '@/lib/functions';
 import { parseDate } from '@/lib/utils';
 import Image from 'next/image';
