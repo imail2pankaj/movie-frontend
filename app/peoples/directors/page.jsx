@@ -3,16 +3,19 @@ import { fetchFilteredPersonsPagination } from '@/actions/person.action';
 import { getPersonTypes } from '@/actions/common.action';
 import { setPersonSortingOption } from '@/lib/functions';
 import dynamic from 'next/dynamic';
+// import FilterBar from '../_component/FilterBar';
+// import PersonCard from '@/components/PersonCard';
+// import LoadMore from '../_component/LoadMore';
 
 const PersonCard = dynamic(() => import('@/components/PersonCard'), {
   loading: () => <p>Loading...</p>,
 })
 
-const FilterBar = dynamic(() => import('./_component/FilterBar'), {
+const FilterBar = dynamic(() => import('../_component/FilterBar'), {
   loading: () => <p>Loading...</p>,
 })
 
-const LoadMore = dynamic(() => import('./_component/LoadMore'), {
+const LoadMore = dynamic(() => import('../_component/LoadMore'), {
   loading: () => <p>Loading...</p>,
 })
 
