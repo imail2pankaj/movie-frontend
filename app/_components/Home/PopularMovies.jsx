@@ -1,8 +1,11 @@
 "use client"
 import { getPopularMovies } from '@/actions/common.action';
-import MovieCard from '@/components/MovieCard'
 import { Skeleton } from '@/components/ui/skeleton';
 import { useEffect, useState } from 'react'
+
+const MovieCard = dynamic(() => import('@/components/MovieCard'), {
+  loading: () => <p></p>,
+})
 
 const PopularMovies = () => {
   const [movies, setMovies] = useState([]);

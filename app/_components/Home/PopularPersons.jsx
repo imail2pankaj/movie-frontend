@@ -1,4 +1,8 @@
-import PersonCard from '@/components/PersonCard'
+
+const PersonCard = dynamic(() => import('@/components/PersonCard'), {
+  loading: () => <p></p>,
+  ssr: false
+})
 
 const PopularPersons = ({ persons }) => {
   return (

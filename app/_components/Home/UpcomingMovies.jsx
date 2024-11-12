@@ -1,12 +1,13 @@
 "use client"
 
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import MovieCard from '@/components/MovieCard'
 import { useEffect, useState } from "react";
 import { getUpcomingMovies } from "@/actions/common.action";
-import { Skeleton } from "@/components/ui/skeleton"
 import CarouselSkeleton from "@/components/CarouselSkeleton";
-import { getImageURL } from "@/lib/functions";
+
+const MovieCard = dynamic(() => import('@/components/MovieCard'), {
+  loading: () => <p></p>,
+})
 
 const UpcomingMovies = () => {
   const [movies, setMovies] = useState([]);

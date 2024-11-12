@@ -22,26 +22,6 @@ const SearchSection = () => {
               <Input type="search" placeholder="Search movies..." name="q" className="flex-1 bg-white text-black placeholder:text-black" />
               <Button type="submit">Search</Button>
             </form>
-            {/* <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 mt-4 justify-center">
-              <Button variant="outline" size="sm">
-                Action
-              </Button>
-              <Button variant="outline" size="sm">
-                Comedy
-              </Button>
-              <Button variant="outline" size="sm">
-                Drama
-              </Button>
-              <Button variant="outline" size="sm">
-                Sci-Fi
-              </Button>
-              <Button variant="outline" size="sm">
-                Horror
-              </Button>
-              <Button variant="outline" size="sm">
-                Romance
-              </Button>
-            </div> */}
           </div>
         </div>
       </div>

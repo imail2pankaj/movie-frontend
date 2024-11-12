@@ -3,27 +3,33 @@ import dynamic from 'next/dynamic'
 import { getPopularPersons } from "@/actions/common.action";
  
 const PopularMovies = dynamic(() => import('./_components/Home/PopularMovies'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p></p>,
+  ssr: false
 })
  
 const PopularPersons = dynamic(() => import('./_components/Home/PopularPersons'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p></p>,
+  ssr: false
 })
  
 const Browse = dynamic(() => import('./_components/Home/Browse'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p></p>,
+  ssr: false
 })
  
 const SearchSection = dynamic(() => import('./_components/Home/SearchSection'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p></p>,
+  ssr: false
 })
  
 const Birthdays = dynamic(() => import('./_components/Home/Birthdays'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p></p>,
+  ssr: false
 })
  
 const UpcomingMovies = dynamic(() => import('./_components/Home/UpcomingMovies'), {
-  loading: () => <p>Loading...</p>,
+  loading: () => <p></p>,
+  ssr: false
 })
 
 export const metadata = {

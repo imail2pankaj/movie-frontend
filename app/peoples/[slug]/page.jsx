@@ -1,5 +1,4 @@
 import { getPersonBySlug } from '@/actions/common.action'
-import PersonJSONLD from '@/components/PersonJSONLD';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -12,8 +11,16 @@ import { parseDate, queryParseDate } from '@/lib/utils';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import PeopleAndPeopleTypeMovies from '../_component/PeopleAndPeopleTypeMovies';
 import { Accordion } from '@/components/ui/accordion';
+
+const PeopleAndPeopleTypeMovies = dynamic(() => import('../_component/PeopleAndPeopleTypeMovies'), {
+  loading: () => <p></p>,
+})
+
+const PersonJSONLD = dynamic(() => import('@/components/PersonJSONLD'), {
+  loading: () => <p></p>,
+})
+
 
 export async function generateMetadata({ params }, parent) {
 

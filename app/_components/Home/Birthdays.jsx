@@ -2,19 +2,12 @@
 
 import { fetchPersonsBirthdayToday } from "@/actions/person.action";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import { getImageURL } from "@/lib/functions";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import BirthdayCarousel from "./BirthdayCarousel";
+
+const BirthdayCarousel = dynamic(() => import('./BirthdayCarousel'), {
+  loading: () => <p></p>
+})
 
 const Birthdays = () => {
   const [bdays, setBdays] = useState([])
@@ -51,39 +44,6 @@ const Birthdays = () => {
         bdays.length > 0 ?
           <div className=" p-6 text-center">
             <BirthdayCarousel bdays={bdays} />
-            {/* <Carousel className="w-full">
-              <CarouselContent className="-ml-1">
-                {bdays.map((_, index) => (
-                  <CarouselItem key={index} className="mx-1 pl-1 basis-1/1 md:basis-1/2 lg:basis-1/5">
-                    <div className="col-span-3 sm:col-span-1">
-                      <Card className="">
-                        <CardContent className="flex flex-col items-center justify-center px-0">
-                          <Link href={`/peoples/${_.slug}`} prefetch={false}>
-                            <Image
-                              src={getImageURL("persons", _.image)}
-                              width={300}
-                              height={200}
-                              alt={_.full_name}
-                              loading='lazy'
-                              className="aspect-[1/1] md:aspect-[1/1] object-cover group-hover:scale-105 transition-transform duration-300 rounded-sm"
-                            />
-                          </Link>
-                          <div className="mt-4 text-center">
-                            <Link href={`/peoples/${_.slug}`} prefetch={false}>
-                              <h3 className="text-md font-bold text-gray-900 dark:text-gray-50">
-                                {_.full_name}
-                              </h3>
-                            </Link>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel> */}
             <Button asChild className="my-8 p-4">
               <Link href={`/peoples?born=${(new Date()).toLocaleString('default', { month: '2-digit' })}-${(new Date().getDate())}`} className="btn-primary">View All</Link>
             </Button>
