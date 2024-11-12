@@ -4,6 +4,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { useEffect, useState } from "react";
 import { getUpcomingMovies } from "@/actions/common.action";
 import CarouselSkeleton from "@/components/CarouselSkeleton";
+import dynamic from "next/dynamic";
 
 const MovieCard = dynamic(() => import('@/components/MovieCard'), {
   loading: () => <p></p>,

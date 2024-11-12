@@ -12,6 +12,7 @@ import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Accordion } from '@/components/ui/accordion';
+import dynamic from 'next/dynamic';
 
 const PeopleAndPeopleTypeMovies = dynamic(() => import('../_component/PeopleAndPeopleTypeMovies'), {
   loading: () => <p></p>,

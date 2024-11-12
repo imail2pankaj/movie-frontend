@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 
 const PersonCard = dynamic(() => import('@/components/PersonCard'), {
   loading: () => <p></p>,

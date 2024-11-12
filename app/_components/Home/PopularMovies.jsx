@@ -1,6 +1,7 @@
 "use client"
 import { getPopularMovies } from '@/actions/common.action';
 import { Skeleton } from '@/components/ui/skeleton';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react'
 
 const MovieCard = dynamic(() => import('@/components/MovieCard'), {

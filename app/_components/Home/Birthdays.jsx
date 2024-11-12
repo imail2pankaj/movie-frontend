@@ -2,6 +2,7 @@
 
 import { fetchPersonsBirthdayToday } from "@/actions/person.action";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
